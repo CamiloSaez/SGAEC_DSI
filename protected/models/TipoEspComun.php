@@ -53,8 +53,8 @@ class TipoEspComun extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'TIP_CORREL' => 'Tip Correl',
-			'TIP_NOMBRE' => 'Tip Nombre',
+			'TIP_CORREL' => 'Identificador tipo de espacio común',
+			'TIP_NOMBRE' => 'Tipo de espacio común',
 		);
 	}
 

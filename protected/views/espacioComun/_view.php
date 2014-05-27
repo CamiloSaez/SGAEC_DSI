@@ -5,7 +5,11 @@
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('ESP_CORREL')); ?>:</b>
+
+	<b><?php 
+	// El siguiente codigo permite extraer el label de un atributo de otro modelo
+	echo CHtml::encode(TipoEspComun::model()->getAttributeLabel('TIP_NOMBRE'));
+	?>:</b>
 	<?php echo CHtml::link(CHtml::encode($data->ESP_CORREL), array('view', 'id'=>$data->ESP_CORREL)); ?>
 	<br />
 
