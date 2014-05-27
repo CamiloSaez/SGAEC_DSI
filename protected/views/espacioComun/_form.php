@@ -21,7 +21,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx(TipoEspComun::model(),'TIP_NOMBRE'); ?>
-		<?php echo $form->dropDownList($model,'TIP_CORREL', CHtml::listData(TipoEspComun::model()->findAll(),'TIP_CORREL', 'TIP_NOMBRE')); ?>
+		<?php echo $form->dropDownList($model,'TIP_CORREL', CHtml::listData(TipoEspComun::model()->findAll(array('order'=>'TIP_NOMBRE')),'TIP_CORREL', 'TIP_NOMBRE')); ?>
 		<?php echo $form->error($model,'TIP_CORREL'); ?>
 	</div>
 

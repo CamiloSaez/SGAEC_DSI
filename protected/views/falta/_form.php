@@ -40,7 +40,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'Numero de hogar'); ?>
-		<?php echo $form->dropDownList($model,'HOG_N_USUARIO',CHtml::listData(Hogar::model()->findAll(),'HOG_N_USUARIO','HOG_N_HOGAR')); 	?>
+		<?php echo $form->dropDownList($model,'HOG_N_USUARIO',CHtml::listData(Hogar::model()->findAll(array('order'=>'HOG_N_HOGAR')),'HOG_N_USUARIO','HOG_N_HOGAR')); 	?>
 		<?php // echo $form->textField($model,'HOG_N_USUARIO',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'HOG_N_USUARIO'); ?>
 	</div>
