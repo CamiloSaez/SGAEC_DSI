@@ -1,3 +1,5 @@
+<div class="span8">
+
 <?php
 /* @var $this TipoEspComunController */
 /* @var $dataProvider CActiveDataProvider */
@@ -7,8 +9,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create TipoEspComun', 'url'=>array('create')),
-	array('label'=>'Manage TipoEspComun', 'url'=>array('admin')),
+	array('label'=>'Crear TipoEspComun', 'url'=>array('create')),
+	array('label'=>'Administrar TipoEspComun', 'url'=>array('admin')),
 );
 ?>
 
@@ -18,3 +20,5 @@ $this->menu=array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 )); ?>
+
+</div>

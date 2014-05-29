@@ -1,15 +1,17 @@
+<div class="span8">
+
 <?php
 /* @var $this TipoEspComunController */
 /* @var $model TipoEspComun */
 
 $this->breadcrumbs=array(
 	'Tipo Esp Comuns'=>array('index'),
-	'Manage',
+	'Administrar',
 );
 
 $this->menu=array(
-	array('label'=>'List TipoEspComun', 'url'=>array('index')),
-	array('label'=>'Create TipoEspComun', 'url'=>array('create')),
+	array('label'=>'Listar TipoEspComun', 'url'=>array('index')),
+	array('label'=>'Crear TipoEspComun', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -26,14 +28,14 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Tipo Esp Comuns</h1>
+<h1>Administrar Tipo Esp Comuns</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
 or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
 </p>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('Búsqueda avanzada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,
@@ -52,3 +54,5 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		),
 	),
 )); ?>
+
+</div>
