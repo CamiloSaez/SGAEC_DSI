@@ -9,8 +9,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar EspacioComun', 'url'=>array('index')),
-	array('label'=>'Administrar EspacioComun', 'url'=>array('admin')),
+	array('label'=>'Listar Espacio Común', 'url'=>array('index')),
+	array('label'=>'Administrar Espacio Común', 'url'=>array('admin')),
 );
 ?>
 

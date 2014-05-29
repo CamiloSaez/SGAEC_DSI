@@ -4,16 +4,16 @@
 /* @var $model EspacioComun */
 
 $this->breadcrumbs=array(
-	'Espacio Comuns'=>array('index'),
+	'Espacios Comunes'=>array('index'),
 	$model->ESP_CORREL=>array('view','id'=>$model->ESP_CORREL),
 	'Actualizar',
 );
 
 $this->menu=array(
-	array('label'=>'Listar EspacioComun', 'url'=>array('index')),
-	array('label'=>'Crear EspacioComun', 'url'=>array('create')),
-	array('label'=>'Ver EspacioComun', 'url'=>array('view', 'id'=>$model->ESP_CORREL)),
-	array('label'=>'Administrar EspacioComun', 'url'=>array('admin')),
+	array('label'=>'Listar Espacio Común', 'url'=>array('index')),
+	array('label'=>'Crear Espacio Común', 'url'=>array('create')),
+	array('label'=>'Ver Espacio Común', 'url'=>array('view', 'id'=>$model->ESP_CORREL)),
+	array('label'=>'Administrar Espacio Común', 'url'=>array('admin')),
 );
 ?>
 

@@ -5,12 +5,12 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Espacio Comuns',
+	'Espacios Comunes',
 );
 
 $this->menu=array(
-	array('label'=>'Crear EspacioComun', 'url'=>array('create')),
-	array('label'=>'Administrar EspacioComun', 'url'=>array('admin')),
+	array('label'=>'Crear Espacio Común', 'url'=>array('create')),
+	array('label'=>'Administrar Espacio Común', 'url'=>array('admin')),
 );
 ?>
 

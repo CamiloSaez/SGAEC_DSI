@@ -5,13 +5,13 @@
 /* @var $model EspacioComun */
 
 $this->breadcrumbs=array(
-	'Espacio Comuns'=>array('index'),
+	'Espacios Comunes'=>array('index'),
 	'Administrar',
 );
 
 $this->menu=array(
-	array('label'=>'Listar EspacioComun', 'url'=>array('index')),
-	array('label'=>'Crear EspacioComun', 'url'=>array('create')),
+	array('label'=>'Listar Espacio Común', 'url'=>array('index')),
+	array('label'=>'Crear Espacio Común', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -28,11 +28,10 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Administrar Espacio Comuns</h1>
+<h1>Administrar Espacios Comunes</h1>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+Aquí usted podrá modificar, eliminar o ver alguno de sus espacios comunes.
 </p>
 
 <?php echo CHtml::link('Búsqueda avanzada','#',array('class'=>'search-button')); ?>
