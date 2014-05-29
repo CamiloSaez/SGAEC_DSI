@@ -1,3 +1,5 @@
+<div class="span8">
+
 <?php
 /* @var $this EspacioComunController */
 /* @var $dataProvider CActiveDataProvider */
@@ -7,8 +9,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create EspacioComun', 'url'=>array('create')),
-	array('label'=>'Manage EspacioComun', 'url'=>array('admin')),
+	array('label'=>'Crear EspacioComun', 'url'=>array('create')),
+	array('label'=>'Administrar EspacioComun', 'url'=>array('admin')),
 );
 ?>
 
@@ -18,3 +20,5 @@ $this->menu=array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 )); ?>
+
+</div>

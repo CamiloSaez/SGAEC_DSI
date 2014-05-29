@@ -21,6 +21,8 @@ class PerfilController extends Controller
               <li><a href="index.php?r=trabajador">Trabajadores</a></li>
               <li><a href="#">Turnos</a></li>
               <li><a href="#">Archivos</a></li>
+              <li><a href="index.php?r=espacioComun">Crear espacio común</a></li>
+              <li><a href="index.php?r=tipoFalta">Crear tipo de falta</a></li>
               <li><a href="index.php?r=falta">Faltas</a></li>
               <li><a href="#">Gastos comunes</a></li>
               <li><a href="#">Boleta remuneraciones</a></li>

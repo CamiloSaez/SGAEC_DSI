@@ -1,9 +1,11 @@
+
 <?php
 /* @var $this EspacioComunController */
 /* @var $data EspacioComun */
 ?>
 
-<div class="view">
+<div class="span8">
+   <div class="well">
 
 
 	<b><?php 
@@ -22,4 +24,6 @@
 	<br />
 
 
+  </div>
 </div>
+
