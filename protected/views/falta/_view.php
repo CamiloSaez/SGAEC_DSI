@@ -3,9 +3,10 @@
 /* @var $data Falta */
 ?>
 
-<div class="span6" style="border: 2px solid; border-radius: 25px; margin: 10px;">
+<div class="span8" >
+	<div class="well" >
 
-<div class="view" style="margin: 12px ;">
+
 
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('Falta Nª')); ?>:</b>
@@ -33,6 +34,5 @@
 	<br />
 	
 
-</div>
-
+	</div>
 </div>

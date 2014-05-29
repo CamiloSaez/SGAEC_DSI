@@ -1,3 +1,7 @@
+<div class="span8">
+
+
+<div class="span8">
 <?php
 /* @var $this FaltaController */
 /* @var $model Falta */
@@ -8,7 +12,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Faltas', 'url'=>array('index')),
+	array('label'=>'Listarar Faltas', 'url'=>array('index')),
 	array('label'=>'Ingresar Falta', 'url'=>array('create')),
 );
 
@@ -56,3 +60,7 @@ Aquí usted podrá modificar, eliminar o ver faltas emitidas en su comunidad.
 		),
 	),
 )); ?>
+
+</div>
+
+</div>
