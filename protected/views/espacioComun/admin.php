@@ -1,4 +1,4 @@
-<div class="span8">
+Ôªø<div class="span8">
 
 <?php
 /* @var $this EspacioComunController */
@@ -10,8 +10,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Espacio Com˙n', 'url'=>array('index')),
-	array('label'=>'Crear Espacio Com˙n', 'url'=>array('create')),
+	array('label'=>'Listar Espacios Comunes', 'url'=>array('index')),
+	array('label'=>'Crear Espacio Com√∫n', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -31,10 +31,10 @@ $('.search-form form').submit(function(){
 <h1>Administrar Espacios Comunes</h1>
 
 <p>
-AquÌ usted podr· modificar, eliminar o ver alguno de sus espacios comunes.
+Aqu√≠ usted podr√° modificar, eliminar o ver alguno de sus espacios comunes.
 </p>
 
-<?php echo CHtml::link('B˙squeda avanzada','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('B√∫squeda avanzada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,

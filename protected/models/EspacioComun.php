@@ -59,7 +59,7 @@ class EspacioComun extends CActiveRecord
 	{
 		return array(
 			'ESP_CORREL' => 'Identificador espacio común',
-			'TIP_CORREL' => 'Identificador tipo de espacio común',
+			'TIP_CORREL' => 'Tipo de espacio común',
 			'ESP_DESCRIPCION' => 'Descripción',
 		);
 	}

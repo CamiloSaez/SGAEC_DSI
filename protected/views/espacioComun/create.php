@@ -9,12 +9,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Espacio Común', 'url'=>array('index')),
+	array('label'=>'Listar Espacios Comunes', 'url'=>array('index')),
 	array('label'=>'Administrar Espacio Común', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Crear EspacioComun</h1>
+<h1>Crear Espacios Comunes</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
 

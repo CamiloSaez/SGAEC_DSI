@@ -105,7 +105,6 @@ class ComunidadController extends Controller
 		));
 	}
 
-
 	/**
 	 * Manages all models.
 	 */

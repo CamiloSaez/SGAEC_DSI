@@ -29,7 +29,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'ESP_DESCRIPCION'); ?>
-		<?php echo $form->textField($model,'ESP_DESCRIPCION',array('size'=>60,'maxlength'=>1024)); ?>
+		<?php echo $form->textArea($model,'ESP_DESCRIPCION',array('rows' => 6, 'cols' => 50,'maxlength'=>1024)); ?>
 		<?php echo $form->error($model,'ESP_DESCRIPCION'); ?>
 	</div>
 

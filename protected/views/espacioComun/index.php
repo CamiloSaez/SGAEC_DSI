@@ -14,7 +14,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Espacio Comuns</h1>
+<h1>Espacios Comunes</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
