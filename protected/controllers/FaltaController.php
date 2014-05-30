@@ -99,11 +99,49 @@ class FaltaController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{
+	{  
+	/*
+	$user= yii::app()->user->id;
+	
+	if( yii::app()->user->checkAccess("hogar") ){
+	$dataProvider=new CActiveDataProvider('Falta', array(
+    'criteria'=>array(
+        'condition'=>"HOG_N_USUARIO = '$user'",               
+    	),
+    ));
+		}
+
+	
+	if( yii::app()->user->checkAccess("conserje") ){
+
+	$cons=Conserje::model()->find("CON_RUT='$user'");	
+
+	$dataProvider=new CActiveDataProvider('Falta', array(
+    'criteria'=>array(
+        'condition'=>"HOG_N_USUARIO = '$user'",               
+    	),
+    ));
+		}
+
+	
+	if( yii::app()->user->checkAccess("hogar") ){
+	$dataProvider=new CActiveDataProvider('Falta', array(
+    'criteria'=>array(
+        'condition'=>"HOG_N_USUARIO = '$user'",               
+    	),
+    ));
+		}			
+
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
+
+	*/
 		$dataProvider=new CActiveDataProvider('Falta');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
+	
 	}
 
 	/**
