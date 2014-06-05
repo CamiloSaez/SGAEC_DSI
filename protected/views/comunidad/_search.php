@@ -37,8 +37,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'COM_COMUNA'); ?>
-		<?php echo $form->textField($model,'COM_COMUNA',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->label($model,'COMU_ID'); ?>
+		<?php echo $form->textField($model,'COMU_ID',array('size'=>60,'maxlength'=>100)); ?>
 	</div>
 
 	<div class="row">

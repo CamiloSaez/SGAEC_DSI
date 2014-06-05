@@ -9,8 +9,9 @@
  * @property string $COM_NOMBRE
  * @property string $COM_DIRECCION
  * @property integer $COM_N_HOGARES
- * @property string $COM_COMUNA
+ * @property string $COMU_ID
  * @property string $COM_TELEFONO
+ * @property integer $COM_MTS_2
  *
  * The followings are the available model relations:
  * @property ARCHIVO[] $aRCHIVOs
@@ -44,12 +45,13 @@ class Comunidad extends CActiveRecord
 			//Largo texto maximo y minimo
 			array('COM_NOMBRE', 'length', 'max'=>100),
 			array('COM_DIRECCION', 'length', 'max'=>200),
-			array('COM_COMUNA', 'length', 'max'=>50),
+			array('COMU_ID', 'length', 'max'=>50),
 			array('COM_TELEFONO', 'length', 'is'=>9),
 			//Enteros positivos
-			array('COM_N_HOGARES', 'numerical', 'integerOnly'=>true),
+			//array('COM_N_HOGARES, COM_MTS_2', 'numerical', 'integerOnly'=>true),
 			//Números naturales
 			array('COM_N_HOGARES', 'numerical','max'=>200,'min'=>2,  'tooSmall'=>'El número de hogares debe ser superior a 1', 'tooBig'=>'El número de hogares debe ser igual o menor a 200'),
+			array('COM_MTS_2', 'numerical','max'=>1000,'min'=>20,  'tooSmall'=>'Los metros cuadrados deben ser superior a 20', 'tooBig'=>'Los metros cuadrados deben ser igual o menor a 1000'),
 			array('COM_TELEFONO', 'numerical','min'=>0, 'tooSmall'=>'', 'tooBig'=>''),
 			array('COM_N_HOGARES', 'validarNumeroHogares'),
 			array('COM_TELEFONO', 'validarTelefono'),
@@ -59,7 +61,7 @@ class Comunidad extends CActiveRecord
 			array('COM_DIRECCION','validarNumeroLetraGato'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('COM_CORREL, ADM_RUT, COM_NOMBRE, COM_DIRECCION, COM_N_HOGARES, COM_COMUNA, COM_TELEFONO', 'safe', 'on'=>'search'),
+			array('COM_CORREL, ADM_RUT, COM_NOMBRE, COM_DIRECCION, COM_N_HOGARES, COMU_ID, COM_TELEFONO, COM_MTS_2', 'safe', 'on'=>'search'),
 			
 		);
 	}
@@ -136,8 +138,9 @@ class Comunidad extends CActiveRecord
 			'COM_NOMBRE' => 'Nombre',
 			'COM_DIRECCION' => 'Dirección',
 			'COM_N_HOGARES' => 'N° Hogares',
-			'COM_COMUNA' => 'Comuna',
+			'COMU_ID' => 'Comuna',
 			'COM_TELEFONO' => 'Teléfono',
+			'COM_MTS_2' => 'Metros cuadrados',
 		);
 	}
 
@@ -165,8 +168,9 @@ class Comunidad extends CActiveRecord
 		$criteria->compare('COM_NOMBRE',$this->COM_NOMBRE,true);
 		$criteria->compare('COM_DIRECCION',$this->COM_DIRECCION,true);
 		$criteria->compare('COM_N_HOGARES',$this->COM_N_HOGARES);
-		$criteria->compare('COM_COMUNA',$this->COM_COMUNA,true);
+		$criteria->compare('COMU_ID',$this->COMU_ID,true);
 		$criteria->compare('COM_TELEFONO',$this->COM_TELEFONO,true);
+		$criteria->compare('COM_MTS_2',$this->COM_MTS_2);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

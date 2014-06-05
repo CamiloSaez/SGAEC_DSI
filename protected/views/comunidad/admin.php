@@ -66,8 +66,9 @@ echo CHtml::link('Búsqueda avanzada','#',array('class'=>'search-button'));
 		'COM_NOMBRE',
 		'COM_DIRECCION',
 		'COM_N_HOGARES',
-		'COM_COMUNA',
+		'COMU_ID',
 		'COM_TELEFONO',
+		'COM_MTS_2',
 		array(
 			'class'=>'CButtonColumn',
 		),

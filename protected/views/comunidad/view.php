@@ -32,8 +32,9 @@ $this->menu=array(
 		'COM_NOMBRE',
 		'COM_DIRECCION',
 		'COM_N_HOGARES',
-		'COM_COMUNA',
+		'COMU_ID',
 		'COM_TELEFONO',
+		'COM_MTS_2'
 	),
 	
 )); ?>

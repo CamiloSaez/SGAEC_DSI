@@ -42,12 +42,16 @@
 	<?php echo CHtml::encode($data->COM_N_HOGARES); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('COM_COMUNA')); ?>:</b>
-	<?php echo CHtml::encode($data->COM_COMUNA); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('COMU_ID')); ?>:</b>
+	<?php echo CHtml::encode($data->COMU_ID); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('COM_TELEFONO')); ?>:</b>
 	<?php echo CHtml::encode($data->COM_TELEFONO); ?>
+	<br />
+	
+	<b><?php echo CHtml::encode($data->getAttributeLabel('COM_MTS_2')); ?>:</b>
+	<?php echo CHtml::encode($data->COM_MTS_2); ?>
 	<br />
 	
 

@@ -49,15 +49,21 @@
 		<?php echo $form->textField($model,'COM_N_HOGARES'); ?>
 		<?php echo $form->error($model,'COM_N_HOGARES'); ?>
 	</div>
+	
+	<div class="row" title="">
+		<?php echo $form->labelEx($model,'COM_MTS_2'); ?>
+		<?php echo $form->textField($model,'COM_MTS_2'); ?>
+		<?php echo $form->error($model,'COM_MTS_2'); ?>
+	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'COM_COMUNA'); ?>
+		<?php echo $form->labelEx($model,'COMU_ID'); ?>
 		<?php 
-		//echo $form->textField($model,'COM_COMUNA',array('size'=>60,'maxlength'=>100)); 
+		//echo $form->textField($model,'COMU_ID',array('size'=>60,'maxlength'=>100)); 
 		//El siguiente muestra como relacionar 2 modelos distintos (COMUNIDAD con COMUNA)
-		echo $form->dropDownList($model,'COM_COMUNA',CHtml::listData(Comuna::model()->findAll(array('order'=>'nombre')),'nombre','nombre')); //Modelo,Ordenar por,Atributo a mostrar
+		echo $form->dropDownList($model,'COMU_ID',CHtml::listData(Comuna::model()->findAll(array('order'=>'COMU_NOMBRE')),'COMU_ID','COMU_NOMBRE')); //Modelo,Ordenar por,Atributo a mostrar
 		?>
-		<?php echo $form->error($model,'COM_COMUNA'); ?>
+		<?php echo $form->error($model,'COMU_ID'); ?>
 	</div>
 
 	<div class="row" title="Debe ser un teléfono. Debe seguir el formato de un número fijo con código de área">
