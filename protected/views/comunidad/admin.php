@@ -66,7 +66,10 @@ echo CHtml::link('Búsqueda avanzada','#',array('class'=>'search-button'));
 		'COM_NOMBRE',
 		'COM_DIRECCION',
 		'COM_N_HOGARES',
-		'COMU_ID',
+		array(
+                        'name'=>'COMU_ID',
+                        'value'=>'$data->cOMU->COMU_NOMBRE', // Poner nombre relación seguida por atributo.
+                ),
 		'COM_TELEFONO',
 		'COM_MTS_2',
 		array(

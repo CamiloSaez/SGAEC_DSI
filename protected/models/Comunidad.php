@@ -119,8 +119,12 @@ class Comunidad extends CActiveRecord
 		return array(
 			'aRCHIVOs' => array(self::HAS_MANY, 'ARCHIVO', 'COM_CORREL'),
 			'aDMRUT' => array(self::BELONGS_TO, 'ADMINISTRADOR', 'ADM_RUT'),
+			'cOMU' => array(self::BELONGS_TO, 'Comuna', 'COMU_ID'),//Segundo parametro es el nombre del modelo (Comuna.php)
+			'cONSERJEs' => array(self::HAS_MANY, 'CONSERJE', 'COM_CORREL'),
 			'eNCUESTAs' => array(self::HAS_MANY, 'ENCUESTA', 'COM_CORREL'),
+			'fALTAs' => array(self::HAS_MANY, 'FALTA', 'COM_CORREL'),
 			'hOGARs' => array(self::HAS_MANY, 'HOGAR', 'COM_CORREL'),
+			'tIPOFALTAs' => array(self::HAS_MANY, 'TIPOFALTA', 'COM_CORREL'),
 			'tRABAJADORs' => array(self::HAS_MANY, 'TRABAJADOR', 'COM_CORREL'),
 		);
 	}
@@ -168,7 +172,7 @@ class Comunidad extends CActiveRecord
 		$criteria->compare('COM_NOMBRE',$this->COM_NOMBRE,true);
 		$criteria->compare('COM_DIRECCION',$this->COM_DIRECCION,true);
 		$criteria->compare('COM_N_HOGARES',$this->COM_N_HOGARES);
-		$criteria->compare('COMU_ID',$this->COMU_ID,true);
+		$criteria->compare('cOMU.COMU_NOMBRE',$this->COMU_ID,true);//Ponemos el nombre de la relación seguido por la variable
 		$criteria->compare('COM_TELEFONO',$this->COM_TELEFONO,true);
 		$criteria->compare('COM_MTS_2',$this->COM_MTS_2);
 

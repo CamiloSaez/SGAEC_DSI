@@ -1,25 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "ESPACIOCOMUN".
+ * This is the model class for table "ARRIENDA".
  *
- * The followings are the available columns in table 'ESPACIOCOMUN':
+ * The followings are the available columns in table 'ARRIENDA':
+ * @property string $HOG_N_USUARIO
  * @property integer $ESP_CORREL
- * @property integer $TIP_CORREL
- * @property string $ESP_DESCRIPCION
+ * @property string $FECHA
  *
  * The followings are the available model relations:
- * @property HOGAR[] $hOGARs
- * @property TIPOESPCOMUN $tIPCORREL
+ * @property ESPACIOCOMUN $eSPCORREL
+ * @property HOGAR $hOGNUSUARIO
  */
-class EspacioComun extends CActiveRecord
+class Arrienda extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'ESPACIOCOMUN';
+		return 'ARRIENDA';
 	}
 
 	/**
@@ -30,12 +30,12 @@ class EspacioComun extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('TIP_CORREL', 'required'),
-			array('TIP_CORREL', 'numerical', 'integerOnly'=>true),
-			array('ESP_DESCRIPCION', 'length', 'max'=>1024),
+			array('HOG_N_USUARIO, ESP_CORREL', 'required'),
+			array('ESP_CORREL', 'numerical', 'integerOnly'=>true),
+			array('HOG_N_USUARIO', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('ESP_CORREL, TIP_CORREL, ESP_DESCRIPCION', 'safe', 'on'=>'search'),
+			array('HOG_N_USUARIO, ESP_CORREL, FECHA', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -47,8 +47,8 @@ class EspacioComun extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'hOGARs' => array(self::MANY_MANY, 'HOGAR', 'ARRIENDA(ESP_CORREL, HOG_N_USUARIO)'),
-			'tIPCORREL' => array(self::BELONGS_TO, 'TipoEspComun', 'TIP_CORREL'),
+			'eSPCORREL' => array(self::BELONGS_TO, 'ESPACIOCOMUN', 'ESP_CORREL'),
+			'hOGNUSUARIO' => array(self::BELONGS_TO, 'HOGAR', 'HOG_N_USUARIO'),
 		);
 	}
 
@@ -58,9 +58,9 @@ class EspacioComun extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ESP_CORREL' => 'Identificador espacio común',
-			'TIP_CORREL' => 'Tipo de espacio común',
-			'ESP_DESCRIPCION' => 'Descripción',
+			'HOG_N_USUARIO' => 'Hog N Usuario',
+			'ESP_CORREL' => 'Esp Correl',
+			'FECHA' => 'Fecha',
 		);
 	}
 
@@ -82,9 +82,9 @@ class EspacioComun extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('HOG_N_USUARIO',$this->HOG_N_USUARIO,true);
 		$criteria->compare('ESP_CORREL',$this->ESP_CORREL);
-		$criteria->compare('tIPCORREL.TIP_NOMBRE',$this->TIP_CORREL, true);
-		$criteria->compare('ESP_DESCRIPCION',$this->ESP_DESCRIPCION,true);
+		$criteria->compare('FECHA',$this->FECHA,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -95,7 +95,7 @@ class EspacioComun extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return EspacioComun the static model class
+	 * @return Arrienda the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

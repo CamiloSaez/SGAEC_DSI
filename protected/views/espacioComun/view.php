@@ -19,7 +19,7 @@ $this->menu=array(
 
 <h1>Ver Espacio Común #<?php echo $model->ESP_CORREL; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailVer', array(
+<?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'ESP_CORREL',

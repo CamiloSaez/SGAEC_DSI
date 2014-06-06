@@ -1,6 +1,6 @@
 <?php
 
-class TipoEspComunController extends Controller
+class ArriendaController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -11,7 +11,13 @@ class TipoEspComunController extends Controller
 	/**
 	 * @return array action filters
 	 */
-
+	public function filters()
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
+		);
+	}
 
 	/**
 	 * Specifies the access control rules.
@@ -56,16 +62,16 @@ class TipoEspComunController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new TipoEspComun;
+		$model=new Arrienda;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['TipoEspComun']))
+		if(isset($_POST['Arrienda']))
 		{
-			$model->attributes=$_POST['TipoEspComun'];
+			$model->attributes=$_POST['Arrienda'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->TIP_CORREL));
+				$this->redirect(array('view','id'=>$model->FECHA));
 		}
 
 		$this->render('create',array(
@@ -85,11 +91,11 @@ class TipoEspComunController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['TipoEspComun']))
+		if(isset($_POST['Arrienda']))
 		{
-			$model->attributes=$_POST['TipoEspComun'];
+			$model->attributes=$_POST['Arrienda'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->TIP_CORREL));
+				$this->redirect(array('view','id'=>$model->FECHA));
 		}
 
 		$this->render('update',array(
@@ -116,7 +122,7 @@ class TipoEspComunController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('TipoEspComun');
+		$dataProvider=new CActiveDataProvider('Arrienda');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -127,10 +133,10 @@ class TipoEspComunController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new TipoEspComun('search');
+		$model=new Arrienda('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['TipoEspComun']))
-			$model->attributes=$_GET['TipoEspComun'];
+		if(isset($_GET['Arrienda']))
+			$model->attributes=$_GET['Arrienda'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -141,12 +147,12 @@ class TipoEspComunController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return TipoEspComun the loaded model
+	 * @return Arrienda the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=TipoEspComun::model()->findByPk($id);
+		$model=Arrienda::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -154,11 +160,11 @@ class TipoEspComunController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param TipoEspComun $model the model to be validated
+	 * @param Arrienda $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='tipo-esp-comun-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='arrienda-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

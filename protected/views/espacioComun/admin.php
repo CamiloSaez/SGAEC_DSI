@@ -47,7 +47,10 @@ Aquí usted podrá modificar, eliminar o ver alguno de sus espacios comunes.
 	'filter'=>$model,
 	'columns'=>array(
 		'ESP_CORREL',
-		'TIP_CORREL',
+		array(
+                        'name'=>'TIP_CORREL',
+                        'value'=>'$data->tIPCORREL->TIP_NOMBRE', // reemplazar acá el campo del modelo Departamento que representa el nombre.
+                ),
 		'ESP_DESCRIPCION',
 		array(
 			'class'=>'CButtonColumn',
