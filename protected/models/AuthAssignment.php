@@ -1,24 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "TIPOFALTA".
+ * This is the model class for table "AuthAssignment".
  *
- * The followings are the available columns in table 'TIPOFALTA':
- * @property integer $TFAL_CORREL
- * @property string $TFAL_NOMBRE
- * @property integer $TFAL_MONTO
+ * The followings are the available columns in table 'AuthAssignment':
+ * @property string $itemname
+ * @property string $userid
+ * @property string $bizrule
+ * @property string $data
  *
  * The followings are the available model relations:
- * @property FALTA[] $fALTAs
+ * @property AuthItem $itemname0
  */
-class TipoFalta extends CActiveRecord
+class AuthAssignment extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'TIPOFALTA';
+		return 'AuthAssignment';
 	}
 
 	/**
@@ -29,28 +30,14 @@ class TipoFalta extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('TFAL_MONTO,TFAL_NOMBRE', 'required'),
-			array('TFAL_MONTO', 'numerical', 'integerOnly'=>true),
-			array('TFAL_NOMBRE', 'length', 'max'=>100),
-			array('TFAL_MONTO', 'validarNumeroHogares'),			
+			array('itemname, userid', 'required'),
+			array('itemname, userid', 'length', 'max'=>64),
+			array('bizrule, data', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('TFAL_CORREL, TFAL_NOMBRE, TFAL_MONTO', 'safe', 'on'=>'search'),
+			array('itemname, userid, bizrule, data', 'safe', 'on'=>'search'),
 		);
 	}
-
-	//Funcion para validar que sea número (natural) 
-	 public function validarNumeroHogares($atribute, $params) {
-				$n1=$this->TFAL_MONTO;
-				$patron="/^[0-9]+$/";//Exp. Reg. que debe aplicarse.
-				//Si encuentra un string distinto a los señalados muestra un error.
-				if(!preg_match($patron, $n1)){
-					$this->addError('TFAL_MONTO', 'Monto asignado debe ser un número');					
-					}	
-				$n2=(int) $n1;				
-				if($n2 > 600000)$this->addError('TFAL_MONTO', 'Monto no debe superar los $600.000');	
-    			}	
-    
 
 	/**
 	 * @return array relational rules.
@@ -60,8 +47,7 @@ class TipoFalta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cOMCORREL' => array(self::BELONGS_TO, 'COMUNIDAD', 'COM_CORREL'),
-			'fALTAs' => array(self::HAS_MANY, 'FALTA', 'TFAL_CORREL'),
+			'itemname0' => array(self::BELONGS_TO, 'AuthItem', 'itemname'),
 		);
 	}
 
@@ -70,11 +56,11 @@ class TipoFalta extends CActiveRecord
 	 */
 	public function attributeLabels()
 	{
-		return array(			
-			'TFAL_CORREL' => 'Falta Numero',
-			'COM_CORREL' => 'Comunidad',
-			'TFAL_NOMBRE' => 'Nombre del tipo de falta',
-			'TFAL_MONTO' => 'Monto asignado ($)',
+		return array(
+			'itemname' => 'Itemname',
+			'userid' => 'Userid',
+			'bizrule' => 'Bizrule',
+			'data' => 'Data',
 		);
 	}
 
@@ -93,13 +79,13 @@ class TipoFalta extends CActiveRecord
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
-		$com= yii::app()->user->comunidad;	
+
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('TFAL_CORREL',$this->TFAL_CORREL);
-		$criteria->compare('COM_CORREL',$com);
-		$criteria->compare('TFAL_NOMBRE',$this->TFAL_NOMBRE,true);
-		$criteria->compare('TFAL_MONTO',$this->TFAL_MONTO);
+		$criteria->compare('itemname',$this->itemname,true);
+		$criteria->compare('userid',$this->userid,true);
+		$criteria->compare('bizrule',$this->bizrule,true);
+		$criteria->compare('data',$this->data,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -110,7 +96,7 @@ class TipoFalta extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return TipoFalta the static model class
+	 * @return AuthAssignment the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

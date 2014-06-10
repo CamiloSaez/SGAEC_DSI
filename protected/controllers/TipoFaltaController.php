@@ -15,7 +15,7 @@ class TipoFaltaController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-			'postOnly + delete', // we only allow deletion via POST request
+			//'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -46,6 +46,7 @@ class TipoFaltaController extends Controller
 		if(isset($_POST['TipoFalta']))
 		{
 			$model->attributes=$_POST['TipoFalta'];
+			$model->COM_CORREL= yii::app()->user->comunidad;	
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->TFAL_CORREL));
 		}
@@ -97,8 +98,15 @@ class TipoFaltaController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{
-		$dataProvider=new CActiveDataProvider('TipoFalta');
+	{   $com= yii::app()->user->comunidad;	
+		
+
+		$dataProvider=new CActiveDataProvider('TipoFalta', array(
+    	'criteria'=>array(
+        'condition'=>"COM_CORREL = '$com'",               
+    	),
+    	));
+
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -113,7 +121,6 @@ class TipoFaltaController extends Controller
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['TipoFalta']))
 			$model->attributes=$_GET['TipoFalta'];
-
 		$this->render('admin',array(
 			'model'=>$model,
 		));

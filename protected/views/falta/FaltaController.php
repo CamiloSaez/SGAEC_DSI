@@ -47,8 +47,7 @@ class FaltaController extends Controller
 		{	
 			$model->attributes=$_POST['Falta'];		
 			$model->FAL_DESCRIPCION=Yii::app()->metodos->aOracion($model->FAL_DESCRIPCION); 	
-			$model->CON_RUT= yii::app()->user->id;	
-			$model->COM_CORREL= yii::app()->user->comunidad;	
+			$model->CON_RUT= "22.222.222-2";//yii::app()->user->id;	
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->FAL_CORREL));			
 		}
@@ -101,42 +100,8 @@ class FaltaController extends Controller
 	 */
 	public function actionIndex()
 	{  
-
-	
+	/*
 	$user= yii::app()->user->id;
-	$com= yii::app()->user->comunidad;	
-
-    if( yii::app()->user->checkAccess("conserje") ){
-	
-	//$cons= Conserje::model()->findAll("COM_CORREL='$com'");
-
-	$dataProvider=new CActiveDataProvider('Falta', array(
-    'criteria'=>array(
-        'condition'=>"COM_CORREL = '$com'",               
-    	),
-    ));
-
-    	$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	
-		}
-	
-
-	if( yii::app()->user->checkAccess("admin") ){
-
-	$dataProvider=new CActiveDataProvider('Falta', array(
-    	'criteria'=>array(
-        'condition'=>"COM_CORREL = '$com'",               
-    	),
-    ));
-
- $this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-		}
-
-	
 	
 	if( yii::app()->user->checkAccess("hogar") ){
 	$dataProvider=new CActiveDataProvider('Falta', array(
@@ -144,21 +109,39 @@ class FaltaController extends Controller
         'condition'=>"HOG_N_USUARIO = '$user'",               
     	),
     ));
-		
+		}
+
+	
+	if( yii::app()->user->checkAccess("conserje") ){
+
+	$cons=Conserje::model()->find("CON_RUT='$user'");	
+
+	$dataProvider=new CActiveDataProvider('Falta', array(
+    'criteria'=>array(
+        'condition'=>"HOG_N_USUARIO = '$user'",               
+    	),
+    ));
+		}
+
+	
+	if( yii::app()->user->checkAccess("hogar") ){
+	$dataProvider=new CActiveDataProvider('Falta', array(
+    'criteria'=>array(
+        'condition'=>"HOG_N_USUARIO = '$user'",               
+    	),
+    ));
+		}			
 
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
 
-		}			
-/*	
---------------------------------------
-
+	*/
 		$dataProvider=new CActiveDataProvider('Falta');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
-	*/
+	
 	}
 
 	/**

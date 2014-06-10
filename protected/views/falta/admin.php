@@ -12,7 +12,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listarar Faltas', 'url'=>array('index')),
+	array('label'=>'Listar Faltas', 'url'=>array('index')),
 	array('label'=>'Ingresar Falta', 'url'=>array('create')),
 );
 
@@ -49,7 +49,7 @@ Aquí usted podrá modificar, eliminar o ver faltas emitidas en su comunidad.
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'FAL_CORREL',
+//		'FAL_CORREL',
 //		'TFAL_CORREL',
 		'CON_RUT',
 		'HOG_N_USUARIO',

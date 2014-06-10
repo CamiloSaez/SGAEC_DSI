@@ -1,9 +1,11 @@
+
 <?php
 /* @var $this TipoFaltaController */
 /* @var $data TipoFalta */
 ?>
 
-<div class="view">
+<div class="span8">
+   <div class="well">
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('TFAL_CORREL')); ?>:</b>
 	<?php echo CHtml::link(CHtml::encode($data->TFAL_CORREL), array('view', 'id'=>$data->TFAL_CORREL)); ?>
@@ -18,4 +20,6 @@
 	<br />
 
 
+  </div>
 </div>
+

@@ -8,13 +8,18 @@
 
 
 
-
+<?php /*
 	<b><?php echo CHtml::encode($data->getAttributeLabel('Falta Nª')); ?>:</b>
 	<?php echo CHtml::link(CHtml::encode($data->FAL_CORREL), array('view', 'id'=>$data->FAL_CORREL)); ?>
 	<br />
+*/ ?>
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('Tipo de falta')); ?>:</b>
-	<?php echo CHtml::encode($data->TFAL_CORREL); ?>
+	<?php  //echo CHtml::encode($data->TFAL_CORREL);
+	$correl= $data->TFAL_CORREL;
+	$falta =  TipoFalta::model()->find("TFAL_CORREL = '$correl'");
+	echo CHtml::encode($falta->TFAL_NOMBRE);
+	?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('RUT del conserje que registro')); ?>:</b>

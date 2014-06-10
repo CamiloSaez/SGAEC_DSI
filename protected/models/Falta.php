@@ -35,7 +35,8 @@ class Falta extends CActiveRecord
 		// will receive user inputs.
 		return array(
 		//	array('TFAL_CORREL, CON_RUT, HOG_N_USUARIO', 'required'),
-			array('TFAL_CORREL, HOG_N_USUARIO', 'required'),
+			array('TFAL_CORREL, HOG_N_USUARIO, COM_CORREL', 'required'),
+			array('COM_CORREL', 'numerical', 'integerOnly'=>true),
 			array('TFAL_CORREL', 'numerical', 'integerOnly'=>true),
 			array('CON_RUT', 'length', 'max'=>12),
 			array('HOG_N_USUARIO', 'length', 'max'=>100),
@@ -43,7 +44,7 @@ class Falta extends CActiveRecord
 			array('FAL_FECHA', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('FAL_CORREL, TFAL_CORREL, CON_RUT, HOG_N_USUARIO, FAL_DESCRIPCION, FAL_FECHA', 'safe', 'on'=>'search'),
+			array('COM_CORREL,FAL_CORREL, TFAL_CORREL, CON_RUT, HOG_N_USUARIO, FAL_DESCRIPCION, FAL_FECHA', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -55,6 +56,7 @@ class Falta extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'cOMCORREL' => array(self::BELONGS_TO, 'COMUNIDAD', 'COM_CORREL'),
 			'tFALCORREL' => array(self::BELONGS_TO, 'Tipofalta', 'TFAL_CORREL'),
 			'hOGNUSUARIO' => array(self::BELONGS_TO, 'Hogar', 'HOG_N_USUARIO'),
 			'cONRUT' => array(self::BELONGS_TO, 'Conserje', 'CON_RUT'),
@@ -66,10 +68,11 @@ class Falta extends CActiveRecord
 	 */
 	public function attributeLabels()
 	{
-		return array(
+		return array(			
 			'FAL_CORREL' => 'Falta Nº',
+			'COM_CORREL' => 'Comunidad',
 			'TFAL_CORREL' => 'Falta tipo',
-			'CON_RUT' => 'Rut conserje',
+			'CON_RUT' => 'Rut conserje registrador',
 			'HOG_N_USUARIO' => 'Username Propietario',
 			'FAL_DESCRIPCION' => 'Descripción',
 			'FAL_FECHA' => 'Fecha registro',
@@ -91,10 +94,12 @@ class Falta extends CActiveRecord
 	public function search()
 	{
 		// @todo Please modify the following code to remove attributes that should not be searched.
+		$com= yii::app()->user->comunidad;	
 
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('FAL_CORREL',$this->FAL_CORREL);
+		$criteria->compare('COM_CORREL',$com);
 		$criteria->compare('TFAL_CORREL',$this->TFAL_CORREL);
 		$criteria->compare('CON_RUT',$this->CON_RUT,true);
 		$criteria->compare('HOG_N_USUARIO',$this->HOG_N_USUARIO,true);
