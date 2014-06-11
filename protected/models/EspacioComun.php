@@ -32,7 +32,8 @@ class EspacioComun extends CActiveRecord
 		return array(
 			array('TIP_CORREL', 'required'),
 			array('TIP_CORREL', 'numerical', 'integerOnly'=>true),
-			array('ESP_DESCRIPCION', 'length', 'max'=>1024),
+			array('ESP_DESCRIPCION', 'length', 'max'=>200),
+			array('ESP_DESCRIPCION', 'match', 'pattern'=>'/^[a-z0-9Ã¡Ã©Ã­Ã³ÃºÃ±\s]+./i','message'=>'La descripción debe poseer al menos una letra y/o número al inicio'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('ESP_CORREL, TIP_CORREL, ESP_DESCRIPCION', 'safe', 'on'=>'search'),

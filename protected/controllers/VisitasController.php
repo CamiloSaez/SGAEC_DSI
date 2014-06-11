@@ -1,6 +1,6 @@
 <?php
 
-class FaltaController extends Controller
+class VisitasController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -15,11 +15,35 @@ class FaltaController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
-//			'postOnly + delete', // we only allow deletion via POST request
+			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
-
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
+		);
+	}
 
 	/**
 	 * Displays a particular model.
@@ -38,19 +62,17 @@ class FaltaController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Falta;
+		$model=new Visitas;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Falta']))
-		{	
-			$model->attributes=$_POST['Falta'];		
-			$model->FAL_DESCRIPCION=Yii::app()->metodos->aOracion($model->FAL_DESCRIPCION); 	
-			$model->CON_RUT= yii::app()->user->id;	
-			$model->COM_CORREL= yii::app()->user->comunidad;	
+		if(isset($_POST['Visitas']))
+		{
+			$model->attributes=$_POST['Visitas'];
+			$model->CON_RUT=yii::app()->user->id;
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->FAL_CORREL));			
+				$this->redirect(array('view','id'=>$model->VIS_CORREL));
 		}
 
 		$this->render('create',array(
@@ -70,11 +92,11 @@ class FaltaController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Falta']))
+		if(isset($_POST['Visitas']))
 		{
-			$model->attributes=$_POST['Falta'];
+			$model->attributes=$_POST['Visitas'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->FAL_CORREL));
+				$this->redirect(array('view','id'=>$model->VIS_CORREL));
 		}
 
 		$this->render('update',array(
@@ -100,65 +122,11 @@ class FaltaController extends Controller
 	 * Lists all models.
 	 */
 	public function actionIndex()
-	{  
-
-	
-	$user= yii::app()->user->id;
-	$com= yii::app()->user->comunidad;	
-
-    if( yii::app()->user->checkAccess("conserje") ){
-	
-	//$cons= Conserje::model()->findAll("COM_CORREL='$com'");
-
-	$dataProvider=new CActiveDataProvider('Falta', array(
-    'criteria'=>array(
-        'condition'=>"COM_CORREL = '$com'",               
-    	),
-    ));
-
-    	$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	
-		}
-	
-
-	if( yii::app()->user->checkAccess("admin") ){
-
-	$dataProvider=new CActiveDataProvider('Falta', array(
-    	'criteria'=>array(
-        'condition'=>"COM_CORREL = '$com'",               
-    	),
-    ));
-
- $this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-		}
-
-	
-	
-	if( yii::app()->user->checkAccess("hogar") ){
-	$dataProvider=new CActiveDataProvider('Falta', array(
-    'criteria'=>array(
-        'condition'=>"HOG_N_USUARIO = '$user'",               
-    	),
-    ));
-		
-
+	{
+		$dataProvider=new CActiveDataProvider('Visitas');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
-
-		}			
-/*	
---------------------------------------
-
-		$dataProvider=new CActiveDataProvider('Falta');
-		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
-		));
-	*/
 	}
 
 	/**
@@ -166,10 +134,10 @@ class FaltaController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Falta('search');
+		$model=new Visitas('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Falta']))
-			$model->attributes=$_GET['Falta'];
+		if(isset($_GET['Visitas']))
+			$model->attributes=$_GET['Visitas'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -180,12 +148,12 @@ class FaltaController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Falta the loaded model
+	 * @return Visitas the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Falta::model()->findByPk($id);
+		$model=Visitas::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -193,11 +161,11 @@ class FaltaController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Falta $model the model to be validated
+	 * @param Visitas $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='falta-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='visitas-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

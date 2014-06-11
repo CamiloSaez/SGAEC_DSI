@@ -20,6 +20,9 @@
 	<?php
 	 echo $cuerpo;
 	?>
+	<br>
+<?php if( yii::app()->user->checkAccess("admin") ) echo CHtml::link("CAMBIAR COMUNIDAD",array("perfil/capture", "id"=>NULL), 
+												array("class"=>"btn-primary  btn-small")); ?>	
 	</div>
 </div>
 </div>

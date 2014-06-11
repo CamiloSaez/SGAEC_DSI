@@ -1,4 +1,5 @@
 
+
 <?php
 /* @var $this ArriendaController */
 /* @var $model Arrienda */
@@ -34,4 +35,5 @@
 <?php $this->endWidget(); ?>
 
 </div><!-- search-form -->
+
 

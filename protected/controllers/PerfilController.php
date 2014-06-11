@@ -4,49 +4,56 @@ class PerfilController extends Controller
 {
 	public function actionIndex(){
 		
-    $titulo="SOLICITE ASIGNACION DE ROL PARA EL SISTEMA ";    
+    $titulo="Su cuenta no a sido asignada correctamente. <br> Favor contactarse con administracion.";    
     $menuLateral='';
-    $imp=0;
+    $cuerpo='';
+    $fail=true;
+    
 
 		//El titulo, cuerpo y menú lateral deben variar según el  usuario.
               if( yii::app()->user->checkAccess("admin") )// && Yii::app()->user->getState('comunidad')!=NULL )
-              {
+              {                
     $cuerpo = '<p> Bienvenido señor/a '.Yii::app()->user->getState('nombre').' </p>';                
 		$titulo="CUENTA ADMINISTRADOR ";
 
+    if(Yii::app()->user->getState("comunidad")!=null){
 		$menuLateral='
 		<li class="nav-header">Opciones</li>                
-              <li><a href="index.php?r=hogar">Hogares</a></li>
-              <li><a href="index.php?r=conserje">Conserje</a></li>
+              <li><a href="index.php?r=hogar" title="Administrar hogares">Hogares</a></li>
+              <li><a href="index.php?r=conserje" title="Administrar conserjes">Conserje</a></li>
               <li><a href="index.php?r=trabajador">Trabajadores</a></li>
-              <li><a href="#">Turnos</a></li>
+              <li><a href="#">Subir Turnos</a></li>
               <li><a href="#">Archivos</a></li>
               <li><a href="index.php?r=espacioComun">Crear espacio común</a></li>
-              <li><a href="index.php?r=tipoFalta">Crear tipo de falta</a></li>
-              <li><a href="index.php?r=falta">Faltas</a></li>
+              <li><a href="index.php?r=falta">Revisar Faltas</a></li>
+              <li><a href="index.php?r=tipoFalta">Crear tipo de falta</a></li>   
               <li><a href="#">Gastos comunes</a></li>
               <li><a href="#">Boleta remuneraciones</a></li>
               <li><a href="#">Encuesta satisfacción</a></li>
               <li><a href="#">Reclamos y sugerencias</a></li>		
 			  ';		
-              }
-              else { 
-                  $imp=1;
-                  $model=new Falta;
-                    // Uncomment the following line if AJAX validation is needed
-                    // $this->performAjaxValidation($model);
+            $fail=false;      
+            $this->render('index',array(
+            
+          'cuerpo'=>$cuerpo,
+          'titulo'=>$titulo,
+          'menuLateral'=>$menuLateral
+          ));
+          }
+    else {
 
-                    if(isset($_POST['Falta']))
-                    { 
-                      $model->attributes=$_POST['Falta'];                                               
-                      if($model->save())
-                        $this->redirect(array('view','id'=>$model->FAL_CORREL));      
-                    }
+         $com=Comunidad::model()->findall("ADM_RUT=?", array(yii::app()->user->id));
 
-                    $this->render('identificarCom',array(
-                      'model'=>$model,
-                    ));                    
-            }
+            $this->render('idCom',array(
+           'com'=>$com,   
+          'cuerpo'=>$cuerpo,
+          'titulo'=>$titulo,
+          'menuLateral'=>$menuLateral
+          ));
+
+        }      
+              
+              } 
 
 
              if( yii::app()->user->checkAccess("hogar")){
@@ -56,14 +63,21 @@ class PerfilController extends Controller
               $menuLateral='
               <li class="nav-header">Opciones</li>              
               <li><a href="#">Gastos comunes</a></li>
-              <li><a href="#">Consultar faltas</a></li>
+              <li><a href="index.php?r=falta">Consultar faltas</a></li>
               <li><a href="#">Consultar visitas</a></li>
               <li><a href="#">Reclamos y sugerencias</a></li>
               <li><a href="#">Responder encuestas</a></li>
-              <li><a href="index.php?r=espacioComun">Espacios comunes</a></li>
+              <li><a href="index.php?r=arrienda">Arrendar espacio común</a></li>
               <li><a href="#">Avisos clasificados</a></li>                      
-                       ';          
+                       ';   
+               $fail=false;        
+               $this->render('index',array(
+              'cuerpo'=>$cuerpo,
+              'titulo'=>$titulo,
+              'menuLateral'=>$menuLateral
+              ));               
               }
+              
 
              if( yii::app()->user->checkAccess("conserje")){
               $titulo="CUENTA CONSERJE ";
@@ -71,19 +85,30 @@ class PerfilController extends Controller
            
               $menuLateral='
               <li class="nav-header">Opciones</li>                                     
-              <li><a href="#">Faltas</a></li>
+              <li><a href="index.php?r=falta">Faltas</a></li>
               <li><a href="#">Visitas</a></li>
               <li><a href="#">Vehículo</a></li>
               <li><a href="#">Correspondencia</a></li>
-                       ';          
+                       ';
+               $fail=false;        
+               $this->render('index',array(
+              'cuerpo'=>$cuerpo,
+              'titulo'=>$titulo,
+              'menuLateral'=>$menuLateral
+              ));                  
               }              
-     if($imp==0) $this->render('index',array(
-			'cuerpo'=>$cuerpo,
-			'titulo'=>$titulo,
-			'menuLateral'=>$menuLateral
-			));//Nombre y valor que recibira la vista mediante el array
+     if($fail==true)   $this->render('index',array(
+              'cuerpo'=>$cuerpo,
+              'titulo'=>$titulo,
+              'menuLateral'=>$menuLateral
+              ));                  
 	}
 
-	
-	
+	public function actionCapture(){
+
+   Yii::app()->user->setState('comunidad',$_GET["id"]);
+   //echo Yii::app()->user->comunidad;
+   $this->redirect(array("index"));
+  }	
+  
 }

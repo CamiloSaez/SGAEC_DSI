@@ -1,26 +1,31 @@
 <?php
 
 /**
- * This is the model class for table "ARRIENDA".
+ * This is the model class for table "VISITAS".
  *
- * The followings are the available columns in table 'ARRIENDA':
- * @property integer $ARR_CORREL
+ * The followings are the available columns in table 'VISITAS':
+ * @property integer $VIS_CORREL
+ * @property string $VIS_RUT
+ * @property integer $VEH_CORREL
+ * @property string $CON_RUT
  * @property string $HOG_N_USUARIO
- * @property integer $ESP_CORREL
- * @property string $FECHA
+ * @property string $VIS_NOMBRE
+ * @property string $VIS_APELLIDOS
+ * @property string $VIS_FECHA
  *
  * The followings are the available model relations:
- * @property ESPACIOCOMUN $eSPCORREL
  * @property HOGAR $hOGNUSUARIO
+ * @property CONSERJE $cONRUT
+ * @property VEHICULOS $vEHCORREL
  */
-class Arrienda extends CActiveRecord
+class Visitas extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'ARRIENDA';
+		return 'VISITAS';
 	}
 
 	/**
@@ -31,13 +36,14 @@ class Arrienda extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('HOG_N_USUARIO, ESP_CORREL', 'required'),
-			array('ESP_CORREL', 'numerical', 'integerOnly'=>true),
-			array('HOG_N_USUARIO', 'length', 'max'=>100),
-			array('FECHA', 'safe'),
+			array('VIS_RUT, CON_RUT, HOG_N_USUARIO', 'required'),
+			array('VEH_CORREL', 'numerical', 'integerOnly'=>true),
+			array('VIS_RUT, CON_RUT', 'length', 'max'=>12),
+			array('HOG_N_USUARIO, VIS_NOMBRE, VIS_APELLIDOS', 'length', 'max'=>100),
+			array('VIS_FECHA', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('ARR_CORREL, HOG_N_USUARIO, ESP_CORREL, FECHA', 'safe', 'on'=>'search'),
+			array('VIS_CORREL, VIS_RUT, VEH_CORREL, CON_RUT, HOG_N_USUARIO, VIS_NOMBRE, VIS_APELLIDOS, VIS_FECHA', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -49,8 +55,9 @@ class Arrienda extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'eSPCORREL' => array(self::BELONGS_TO, 'ESPACIOCOMUN', 'ESP_CORREL'),
 			'hOGNUSUARIO' => array(self::BELONGS_TO, 'HOGAR', 'HOG_N_USUARIO'),
+			'cONRUT' => array(self::BELONGS_TO, 'CONSERJE', 'CON_RUT'),
+			'vEHCORREL' => array(self::BELONGS_TO, 'VEHICULOS', 'VEH_CORREL'),
 		);
 	}
 
@@ -60,10 +67,14 @@ class Arrienda extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'ARR_CORREL' => 'Identificador del arriendo',
-			'HOG_N_USUARIO' => 'N° de hogar',
-			'ESP_CORREL' => 'Espacio común',
-			'FECHA' => 'Fecha',
+			'VIS_CORREL' => 'Identificador',
+			'VIS_RUT' => 'Rut visita',
+			'VEH_CORREL' => 'Vehiculo',
+			'CON_RUT' => 'Conserje',
+			'HOG_N_USUARIO' => 'N° hogar',
+			'VIS_NOMBRE' => 'Nombre visita',
+			'VIS_APELLIDOS' => 'Apellido visita',
+			'VIS_FECHA' => 'Fecha',
 		);
 	}
 
@@ -85,10 +96,14 @@ class Arrienda extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('ARR_CORREL',$this->ARR_CORREL);
+		$criteria->compare('VIS_CORREL',$this->VIS_CORREL);
+		$criteria->compare('VIS_RUT',$this->VIS_RUT,true);
+		$criteria->compare('VEH_CORREL',$this->VEH_CORREL);
+		$criteria->compare('CON_RUT',yii::app()->user->id,true);
 		$criteria->compare('HOG_N_USUARIO',$this->HOG_N_USUARIO,true);
-		$criteria->compare('ESP_CORREL',$this->ESP_CORREL);
-		$criteria->compare('FECHA',$this->FECHA,true);
+		$criteria->compare('VIS_NOMBRE',$this->VIS_NOMBRE,true);
+		$criteria->compare('VIS_APELLIDOS',$this->VIS_APELLIDOS,true);
+		$criteria->compare('VIS_FECHA',$this->VIS_FECHA,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -99,7 +114,7 @@ class Arrienda extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Arrienda the static model class
+	 * @return Visitas the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

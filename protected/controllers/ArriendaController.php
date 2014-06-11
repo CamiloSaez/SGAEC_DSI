@@ -122,10 +122,30 @@ class ArriendaController extends Controller
 	 */
 	public function actionIndex()
 	{
+	if(isset($_POST['Arrienda']))
+		{
+	
+	$user= yii::app()->user->id;
+	//$com= yii::app()->user->comunidad;
+	if( yii::app()->user->checkAccess("hogar") ){
+		$dataProvider=new CActiveDataProvider('Arrienda', array(
+    'criteria'=>array(
+        'condition'=>"HOG_N_USUARIO = '$user'",               
+    	),
+    ));
+		
+		}else{
 		$dataProvider=new CActiveDataProvider('Arrienda');
+		
+		}
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
+		
+		}else{
+		$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		
+		}
 	}
 
 	/**

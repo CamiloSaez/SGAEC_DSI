@@ -1,4 +1,5 @@
 
+
 <?php
 /* @var $this ArriendaController */
 /* @var $data Arrienda */
@@ -20,6 +21,9 @@
 	<br />
 
 
+    </div>
+</div>
   </div>
 </div>
+
 

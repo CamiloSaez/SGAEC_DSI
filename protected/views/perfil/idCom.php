@@ -23,19 +23,37 @@
 	?></h4>
 
 
-		<div class="form">
-		<?php echo CHtml::beginForm(); ?>
-			
-		<div class="row">
-			<?php echo 'Seleccione la comunidad que desea administrar'; ?>
-			<?php //echo dropDownList($model,'TFAL_CORREL', CHtml::listData(Comunidad::model()->findAll(),'COM_CORREL', 'COM_NOMBRE'));?>		
-		</div>
+
+	<?php if( yii::app()->user->checkAccess("admin") ) {
+
+		Echo "<h4> Seleccione la comunidad que desea administrar </h4><br>";
+		foreach ($com as $data): ?> 
+
+		<li >
+			<?php echo "Comunidad : ";?>
+				<small>
+					<?php $data->COM_CORREL;?>					
+				</small>
+				<?php echo CHtml::link($data->COM_NOMBRE,array("perfil/Capture", "id"=>$data->COM_CORREL), 
+												array("class"=>"btn-primary  btn-large")); ?>	
+			<hr>																						
+		</a>
+	</li>
 
 
-		
+<?php /*
 
-		<?php echo CHtml::endForm(); ?>
-		</div><!-- form -->
+		<a href="#" class="btn btn-primary btn-large"><i class="icon-white icon-home"></i> <?php echo $data->COM_NOMBRE; ?></a>
+
+		<h3> <?php // echo $data->COM_CORREL; ?>  </h3>		
+*/?>		
+
+	<?php endforeach; 
+
+	}
+ ?>
+
+
 
 
 	</div>

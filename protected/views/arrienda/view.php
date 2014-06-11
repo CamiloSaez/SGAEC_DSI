@@ -1,4 +1,5 @@
 
+
 <?php
 /* @var $this ArriendaController */
 /* @var $model Arrienda */
@@ -9,7 +10,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listar Arrienda', 'url'=>array('index')),
+	array('label'=>'Listarar Arrienda', 'url'=>array('index')),
 	array('label'=>'Crear Arrienda', 'url'=>array('create')),
 	array('label'=>'Actualizar Arrienda', 'url'=>array('update', 'id'=>$model->FECHA)),
 	array('label'=>'Eliminar Arrienda', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->FECHA),'confirm'=>'Are you sure you want to delete this item?')),
@@ -27,4 +28,5 @@ $this->menu=array(
 		'FECHA',
 	),
 )); ?>
+
 

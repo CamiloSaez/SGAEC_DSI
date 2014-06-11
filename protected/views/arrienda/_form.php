@@ -1,4 +1,5 @@
 
+
 <?php
 /* @var $this ArriendaController */
 /* @var $model Arrienda */
@@ -20,22 +21,23 @@
 
 	<?php echo $form->errorSummary($model); ?>
    <div class="span8">
+   <div class="span8">
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'HOG_N_USUARIO'); ?>
-		<?php echo $form->textField($model,'HOG_N_USUARIO',array('size'=>60,'maxlength'=>100)); ?>
+		<?php echo $form->dropDownList($model,'HOG_N_USUARIO',CHtml::listData(Hogar::model()->findAll(array('order'=>'HOG_N_HOGAR')),'HOG_N_USUARIO','HOG_N_HOGAR'));?>
 		<?php echo $form->error($model,'HOG_N_USUARIO'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'ESP_CORREL'); ?>
-		<?php echo $form->textField($model,'ESP_CORREL'); ?>
+		<?php echo $form->dropDownList($model,'ESP_CORREL',CHtml::listData(EspacioComun::model()->findAll(array('order'=>'ESP_DESCRIPCION')),'ESP_CORREL','ESP_DESCRIPCION'));?>
 		<?php echo $form->error($model,'ESP_CORREL'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'FECHA'); ?>
-		<?php echo $form->textField($model,'FECHA'); ?>
+		<?php echo $form->textField($model,'FECHA',array('class'=>'datetimepicker2')); ?>
 		<?php echo $form->error($model,'FECHA'); ?>
 	</div>
 
@@ -44,7 +46,9 @@
 	</div>
 
     </div>
+    </div>
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
 

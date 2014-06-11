@@ -28,7 +28,9 @@ class TipoEspComun extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('TIP_NOMBRE', 'length', 'max'=>100),
+			array('TIP_NOMBRE', 'required'),
+			array('TIP_NOMBRE', 'length', 'min'=>2,'max'=>50),
+			array('TIP_NOMBRE', 'match', 'pattern'=>'/^[a-zÃ¡Ã©Ã­Ã³ÃºÃ±\s]+$/i','message'=>'Porfavor ingrese solo letras'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('TIP_CORREL, TIP_NOMBRE', 'safe', 'on'=>'search'),
