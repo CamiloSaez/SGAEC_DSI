@@ -1,18 +1,20 @@
+
 <?php
 /* @var $this TipoEspComunController */
 /* @var $model TipoEspComun */
 
 $this->breadcrumbs=array(
-	'Tipo Esp Comuns'=>array('index'),
-	'Create',
+	'Tipo de espacio común'=>array('index'),
+	'Crear',
 );
 
 $this->menu=array(
-	array('label'=>'List TipoEspComun', 'url'=>array('index')),
-	array('label'=>'Manage TipoEspComun', 'url'=>array('admin')),
+	array('label'=>'Listar tipo', 'url'=>array('index')),
+	array('label'=>'Administrar tipo', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create TipoEspComun</h1>
+<h1>Crear tipo de espacio</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
+

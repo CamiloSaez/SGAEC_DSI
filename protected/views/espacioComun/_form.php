@@ -1,3 +1,4 @@
+
 <?php
 /* @var $this EspacioComunController */
 /* @var $model EspacioComun */
@@ -15,26 +16,35 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Los campos con <span class="required">*</span> son requeridos.</p>
 
 	<?php echo $form->errorSummary($model); ?>
+   <div class="span8">
 
 	<div class="row">
 		<?php echo $form->labelEx(TipoEspComun::model(),'TIP_NOMBRE'); ?>
-		<?php echo $form->dropDownList($model,'TIP_CORREL', CHtml::listData(TipoEspComun::model()->findAll(),'TIP_CORREL', 'TIP_NOMBRE')); ?>
+		<?php echo $form->dropDownList($model,'TIP_CORREL', CHtml::listData(TipoEspComun::model()->findAll(array('order'=>'TIP_NOMBRE')),'TIP_CORREL', 'TIP_NOMBRE')); ?>
 		<?php echo $form->error($model,'TIP_CORREL'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'ESP_DESCRIPCION'); ?>
-		<?php echo $form->textField($model,'ESP_DESCRIPCION',array('size'=>60,'maxlength'=>1024)); ?>
+		<?php echo $form->textArea($model,'ESP_DESCRIPCION',array('rows' => 6, 'cols' => 50,'maxlength'=>1024)); ?>
 		<?php echo $form->error($model,'ESP_DESCRIPCION'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'ESP_VALOR'); ?>
+		<?php echo $form->textField($model,'ESP_VALOR',array('size'=>60,'maxlength'=>100, 'class'=>'peso')); ?>
+		<?php echo $form->error($model,'ESP_VALOR'); ?>
+	</div>
+	
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
 	</div>
 
+    </div>
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+

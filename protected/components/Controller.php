@@ -27,14 +27,129 @@ class Controller extends CController
 		public function accessRules()
 	{
 		return array(
+		
+			/********Accesos Sprint Camilo***************/
+			
+				/******** Espacios comunes ********/
+					array('allow',  			 
+						'controllers'=>array("espacioComun"),
+						'actions'=>array('view','create','update','delete','index','admin'),	
+						"roles"=>array('admin'),				
+					),	
+					//Conserje no puede:
+					array('deny',  			 
+						'controllers'=>array("espacioComun"),
+						'actions'=>array('view','create','update','delete','index','admin'),	
+						"roles"=>array('conserje'),				
+					),	
+					//hogar no puede:
+					array('deny',  			 
+						'controllers'=>array("espacioComun"),
+						'actions'=>array('view','create','update','delete','index','admin'),	
+						"roles"=>array('hogar'),				
+					),
+				/******** Tipos de espacios comunes ********/
+					//Administrador puede:
+					array('allow',  			 
+						'controllers'=>array("tipoEspComun"),
+						'actions'=>array('view','create','update','delete','index','admin'),	
+						"roles"=>array('admin'),				
+					),	
+					//Conserje no puede:
+					array('deny',  			 
+						'controllers'=>array("tipoEspComun"),
+						'actions'=>array('view','create','update','delete','index','admin'),	
+						"roles"=>array('conserje'),				
+					),	
+					//hogar no puede:
+					array('deny',  			 
+						'controllers'=>array("tipoEspComun"),
+						'actions'=>array('view','create','update','delete','index','admin'),	
+						"roles"=>array('hogar'),				
+					),	
+					
+				
+				/******** Arriendos ********/
+					//Conserje puede:
+					array('allow',  			 
+						'controllers'=>array("arrienda"),
+						'actions'=>array('view','index'),	
+						"roles"=>array('conserje'),				
+					),						
+					//Conserje no puede:
+					array('allow',  			 
+						'controllers'=>array("arrienda"),
+						'actions'=>array('create','update','delete', 'admin'),	
+						"roles"=>array('conserje'),				
+					),	
+					//Administrador puede:
+					array('allow',  			 
+						'controllers'=>array("arrienda"),
+						'actions'=>array('view','index','admin'),	
+						"roles"=>array('admin'),				
+					),	
+					//Administrador no puede:
+					array('deny',  			 
+						'controllers'=>array("arrienda"),
+						'actions'=>array('create','update','delete'),	
+						"roles"=>array('admin'),				
+					),	
+					//Hogar puede:
+					array('allow',  			 
+						'controllers'=>array("arrienda"),
+						'actions'=>array('view','create','update','delete','index'),	
+						"roles"=>array('hogar'),				
+					),	
+					
+		/******** Visitas ********/
+					//Conserje puede:
+					array('allow',  			 
+						'controllers'=>array("visitas"),
+						//'actions'=>array('view','create','update','delete', 'admin'),	
+						"roles"=>array('conserje'),				
+					),	
+					
+					//Administrador no puede:
+					array('deny',  			 
+						'controllers'=>array("visitas"),
+						'actions'=>array('view','create','update','delete', 'admin'),	
+						"roles"=>array('admin'),				
+					),	
+					//Hogar puede:
+					array('allow',  			 
+						'controllers'=>array("visitas"),
+						'actions'=>array('view'),	
+						"roles"=>array('hogar'),				
+					),	
+					//Hogar no puede:
+					array('deny',  			 
+						'controllers'=>array("visitas"),
+						'actions'=>array('create','update','delete', 'admin'),	
+						"roles"=>array('hogar'),				
+					),	
+
+/*******************************************/			
+
+			array('allow',  // allow all users to perform 'index' and 'view' actions				 
+				 'controllers'=>array("archivo"),
+				//'users'=>array('@'),
+				"roles"=>array('conserje'),				
+			),		
+
+			array('deny',  // allow all users to perform 'index' and 'view' actions				 
+				 'controllers'=>array("archivo"),
+				 'actions'=>array('update'),				
+				"roles"=>array('admin'),			
+			),	
 
 
+/*******************************************/
 			array('allow',  // allow all users to perform 'index' and 'view' actions				 
 				 'controllers'=>array("falta"),
 				//'users'=>array('@'),
 				"roles"=>array('conserje'),				
 			),			
-
+			
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index'),				
 				"roles"=>array('hogar'),

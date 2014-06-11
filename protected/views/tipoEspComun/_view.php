@@ -1,9 +1,11 @@
+
 <?php
 /* @var $this TipoEspComunController */
 /* @var $data TipoEspComun */
 ?>
 
-<div class="view">
+<div class="span8">
+   <div class="well">
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('TIP_CORREL')); ?>:</b>
 	<?php echo CHtml::link(CHtml::encode($data->TIP_CORREL), array('view', 'id'=>$data->TIP_CORREL)); ?>
@@ -14,4 +16,6 @@
 	<br />
 
 
+  </div>
 </div>
+

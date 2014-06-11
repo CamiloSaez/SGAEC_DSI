@@ -59,10 +59,13 @@
 		<?php echo $form->labelEx($model,'Fecha en que fue realizada'); ?>
 
 
-		<?php echo $this->renderPartial('application.views.calendario.fecha', array('model'=>$model,'name'=>'FAL_FECHA')); /*  ?>        	
+			<?php /* echo $this->renderPartial('application.views.calendario.fecha', array('model'=>$model,'name'=>'FAL_FECHA')); /*  ?>        	
 	       <input type="text" name="datepicker" id="datepicker" readonly="readonly" size="12" />
            </form>
 		<?php echo $form->textField($model,'FAL_FECHA');   */        ?>
+
+		<?php echo $form->textField($model,'FAL_FECHA',array('class'=>'datetimepicker3')); ?>
+		
 
 
 		<?php echo $form->error($model,'FAL_FECHA'); ?>

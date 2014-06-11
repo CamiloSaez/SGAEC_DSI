@@ -1,3 +1,4 @@
+
 <?php
 /* @var $this TipoEspComunController */
 /* @var $model TipoEspComun */
@@ -15,9 +16,10 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Los campos con <span class="required">*</span> son requeridos.</p>
 
 	<?php echo $form->errorSummary($model); ?>
+   <div class="span8">
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'TIP_NOMBRE'); ?>
@@ -26,9 +28,11 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
 	</div>
 
+    </div>
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+

@@ -32,10 +32,12 @@ class EspacioComun extends CActiveRecord
 		return array(
 			array('TIP_CORREL', 'required'),
 			array('TIP_CORREL', 'numerical', 'integerOnly'=>true),
-			array('ESP_DESCRIPCION', 'length', 'max'=>1024),
+			array('ESP_DESCRIPCION', 'length', 'max'=>200),
+			array('ESP_DESCRIPCION', 'match', 'pattern'=>'/^[a-z0-9Ã¡Ã©Ã­Ã³ÃºÃ±\s]+./i','message'=>'La descripción debe poseer al menos una letra y/o número al inicio'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('ESP_CORREL, TIP_CORREL, ESP_DESCRIPCION', 'safe', 'on'=>'search'),
+			array('ESP_VALOR', 'numerical'),
 		);
 	}
 
@@ -48,7 +50,7 @@ class EspacioComun extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'hOGARs' => array(self::MANY_MANY, 'HOGAR', 'ARRIENDA(ESP_CORREL, HOG_N_USUARIO)'),
-			'tIPCORREL' => array(self::BELONGS_TO, 'TIPOESPCOMUN', 'TIP_CORREL'),
+			'tIPCORREL' => array(self::BELONGS_TO, 'TipoEspComun', 'TIP_CORREL'),
 		);
 	}
 
@@ -59,8 +61,9 @@ class EspacioComun extends CActiveRecord
 	{
 		return array(
 			'ESP_CORREL' => 'Identificador espacio común',
-			'TIP_CORREL' => 'Identificador tipo de espacio común',
+			'TIP_CORREL' => 'Tipo de espacio común',
 			'ESP_DESCRIPCION' => 'Descripción',
+			'ESP_VALOR'=>'Valor',
 		);
 	}
 
@@ -83,7 +86,7 @@ class EspacioComun extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('ESP_CORREL',$this->ESP_CORREL);
-		$criteria->compare('TIP_CORREL',$this->TIP_CORREL);
+		$criteria->compare('tIPCORREL.TIP_NOMBRE',$this->TIP_CORREL, true);
 		$criteria->compare('ESP_DESCRIPCION',$this->ESP_DESCRIPCION,true);
 
 		return new CActiveDataProvider($this, array(

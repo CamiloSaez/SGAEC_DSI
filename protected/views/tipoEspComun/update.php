@@ -1,21 +1,23 @@
+
 <?php
 /* @var $this TipoEspComunController */
 /* @var $model TipoEspComun */
 
 $this->breadcrumbs=array(
-	'Tipo Esp Comuns'=>array('index'),
+	'Tipo de espacio común'=>array('index'),
 	$model->TIP_CORREL=>array('view','id'=>$model->TIP_CORREL),
-	'Update',
+	'Actualizar',
 );
 
 $this->menu=array(
-	array('label'=>'List TipoEspComun', 'url'=>array('index')),
-	array('label'=>'Create TipoEspComun', 'url'=>array('create')),
-	array('label'=>'View TipoEspComun', 'url'=>array('view', 'id'=>$model->TIP_CORREL)),
-	array('label'=>'Manage TipoEspComun', 'url'=>array('admin')),
+	array('label'=>'Listar tipo', 'url'=>array('index')),
+	array('label'=>'Crear tipo', 'url'=>array('create')),
+	array('label'=>'Ver tipo', 'url'=>array('view', 'id'=>$model->TIP_CORREL)),
+	array('label'=>'Administrar tipo', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Update TipoEspComun <?php echo $model->TIP_CORREL; ?></h1>
+<h1>Actualizar Tipo de espacio común <?php echo $model->TIP_CORREL; ?></h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
+

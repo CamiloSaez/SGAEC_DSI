@@ -50,6 +50,7 @@ class UserIdentity extends CUserIdentity
 					//yii::app()->user->USER_ROL;
 					//$this->_rol=$admin->USU_ROL;
 					$this->setState("nombre",$pas->CON_NOMBRE);
+					$this->setState("comunidad",$pas->COM_CORREL);
 					$this->errorCode=self::ERROR_NONE;
 					}			
 			if($band==3) if($this->password!==$pas->HOG_CLAVE) $this->errorCode=self::ERROR_PASSWORD_INVALID;
@@ -57,6 +58,7 @@ class UserIdentity extends CUserIdentity
 					//yii::app()->user->USER_ROL;
 					//$this->_rol=$admin->USU_ROL;
 					$this->setState("nombre",$pas->HOG_NOMBRE);
+					$this->setState("comunidad",$pas->COM_CORREL);
 					$this->errorCode=self::ERROR_NONE;
 					}			
 		   }		

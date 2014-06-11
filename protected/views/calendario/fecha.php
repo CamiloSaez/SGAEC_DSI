@@ -22,7 +22,7 @@ $this->widget('zii.widgets.jui.CJuiDatePicker',
 			'showAnim'=>'slide',
 			'showButtonPanel'=>false,
 			'showOn'=>'button',
-			'showOtherMonths'=>false,
+			'showOtherMonths'=>true,
 			'changeMonth' => true,
 			//'changeYear' => 'true',
 			'minDate'=>"-7s", //fecha minima... Solo 7 dias!!
