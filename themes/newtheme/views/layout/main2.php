@@ -10,9 +10,6 @@
     <!-- Le styles -->
     <link href="<?php echo yii::app()->theme->baseUrl;?>/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo yii::app()->theme->baseUrl;?>/bootstrap/css/jquery.datetimepicker.css"/ >
-
-	<link rel="stylesheet" type="text/css" href="<?php echo yii::app()->theme->baseUrl;?>/bootstrap/calendario/tcal.css"/ >
-
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="<?php echo yii::app()->theme->baseUrl;?>/http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -126,13 +123,8 @@
 	<script src="<?php echo yii::app()->theme->baseUrl;?>/bootstrap/js/funciones.js" type="text/javascript"></script>
 	<script src="<?php echo yii::app()->theme->baseUrl;?>/bootstrap/js/jquery.datetimepicker.js"></script>
 	<script src="<?php echo yii::app()->theme->baseUrl;?>/bootstrap/js/jquery.maskedinput.js"></script>
-	<script src="<?php echo yii::app()->theme->baseUrl;?>/bootstrap/calendario/tcal.js"></script>
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
-<!--
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
--->	
+	
 	<script type="text/javascript">
 		jQuery('.datetimepicker').datetimepicker({
 		format:'Y/m/d H:i',
@@ -149,17 +141,6 @@
 		maxDate: '+1970/01/02'
 		});
 	</script>	
-
-
-	<script type="text/javascript">
-		jQuery('.datetimepicker3').datetimepicker({
-		format:'Y/m/d',
-		lang:'es',
-		maxDate: 'today',
-		minDate: '-1970/01/02'
-		});
-	</script>
-
 	<script type="text/javascript">
 		jQuery(function($){
    $(".rut").Rut({

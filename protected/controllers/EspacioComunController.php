@@ -11,7 +11,19 @@ class EspacioComunController extends Controller
 	/**
 	 * @return array action filters
 	 */
+public function accessRules()
+	{
+		return array(				
 
+				array('allow',  			 						
+						'actions'=>array('view','create','update','delete','index','admin'),	
+						"roles"=>array('admin'),				
+					),						
+					array('deny',  // deny all users
+					'users'=>array('*'),
+					),
+		);
+	}
 
 	/**
 	 * Specifies the access control rules.
@@ -44,6 +56,7 @@ class EspacioComunController extends Controller
 		if(isset($_POST['EspacioComun']))
 		{
 			$model->attributes=$_POST['EspacioComun'];
+			$model->ADM_RUT=yii::app()->user->id;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->ESP_CORREL));
 		}

@@ -1,23 +1,25 @@
 <?php
 
 /**
- * This is the model class for table "TIPO_ESP_COMUN".
+ * This is the model class for table "ESPACIOCOMUN".
  *
- * The followings are the available columns in table 'TIPO_ESP_COMUN':
+ * The followings are the available columns in table 'ESPACIOCOMUN':
+ * @property integer $ESP_CORREL
  * @property integer $TIP_CORREL
- * @property string $TIP_NOMBRE
+ * @property string $ESP_DESCRIPCION
  *
  * The followings are the available model relations:
- * @property ESPACIOCOMUN[] $eSPACIOCOMUNs
+ * @property HOGAR[] $hOGARs
+ * @property TIPOESPCOMUN $tIPCORREL
  */
-class TipoEspComun extends CActiveRecord
+class EspacioComun extends CActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'TIPO_ESP_COMUN';
+		return 'ESPACIOCOMUN';
 	}
 
 	/**
@@ -28,12 +30,14 @@ class TipoEspComun extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('TIP_NOMBRE', 'required'),
-			array('TIP_NOMBRE', 'length', 'min'=>2,'max'=>50),
-			array('TIP_NOMBRE', 'match', 'pattern'=>'/^[a-zÃ¡Ã©Ã­Ã³ÃºÃ±\s]+$/i','message'=>'Porfavor ingrese solo letras'),
+			array('TIP_CORREL', 'required'),
+			array('TIP_CORREL', 'numerical', 'integerOnly'=>true),
+			array('ESP_DESCRIPCION', 'length', 'max'=>200),
+			array('ESP_DESCRIPCION', 'match', 'pattern'=>'/^[a-z0-9Ã¡Ã©Ã­Ã³ÃºÃ±\s]+./i','message'=>'La descripción debe poseer al menos una letra y/o número al inicio'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('TIP_CORREL, TIP_NOMBRE', 'safe', 'on'=>'search'),
+			array('ESP_CORREL, TIP_CORREL, ESP_DESCRIPCION', 'safe', 'on'=>'search'),
+			array('ESP_VALOR', 'numerical'),
 		);
 	}
 
@@ -45,8 +49,8 @@ class TipoEspComun extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'eSPACIOCOMUNs' => array(self::HAS_MANY, 'ESPACIOCOMUN', 'TIP_CORREL'),
-			'cOMCORREL' => array(self::BELONGS_TO, 'Comunidad', 'COM_CORREL'),
+			'hOGARs' => array(self::MANY_MANY, 'HOGAR', 'ARRIENDA(ESP_CORREL, HOG_N_USUARIO)'),
+			'tIPCORREL' => array(self::BELONGS_TO, 'TipoEspComun', 'TIP_CORREL'),
 		);
 	}
 
@@ -56,9 +60,10 @@ class TipoEspComun extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'COM_CORREL' => 'Identificador',
-			'TIP_CORREL' => 'Identificador tipo de espacio común',
-			'TIP_NOMBRE' => 'Tipo de espacio común',
+			'ESP_CORREL' => 'Identificador espacio común',
+			'TIP_CORREL' => 'Tipo de espacio común',
+			'ESP_DESCRIPCION' => 'Descripción',
+			'ESP_VALOR'=>'Valor',
 		);
 	}
 
@@ -80,9 +85,9 @@ class TipoEspComun extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('TIP_CORREL',$this->TIP_CORREL);
-		$criteria->compare('TIP_NOMBRE',$this->TIP_NOMBRE,true);
-		$criteria->compare('COM_CORREL',yii::app()->user->comunidad,true);
+		$criteria->compare('ESP_CORREL',$this->ESP_CORREL);
+		$criteria->compare('tIPCORREL.TIP_NOMBRE',$this->TIP_CORREL, true);
+		$criteria->compare('ESP_DESCRIPCION',$this->ESP_DESCRIPCION,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -93,7 +98,7 @@ class TipoEspComun extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return TipoEspComun the static model class
+	 * @return EspacioComun the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{

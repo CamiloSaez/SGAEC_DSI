@@ -27,6 +27,10 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('ESP_DESCRIPCION')); ?>:</b>
 	<?php echo CHtml::encode($data->ESP_DESCRIPCION); ?>
 	<br />
+	
+	<b><?php echo CHtml::encode($data->getAttributeLabel('ESP_VALOR')); ?>:</b>
+	<?php echo CHtml::encode($data->ESP_VALOR); ?>
+	<br />
 
 
   </div>

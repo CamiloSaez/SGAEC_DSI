@@ -1,6 +1,6 @@
 <?php
 
-class ArriendaController extends Controller
+class VisitasController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -20,29 +20,6 @@ class ArriendaController extends Controller
 	}
 
 
-		public function accessRules()
-	{
-		return array(
-		
-					array('allow',  			 						
-						'actions'=>array('view','index'),	
-						"roles"=>array('conserje'),				
-					),					
-					//Administrador puede:
-					array('allow',  			 						
-						'actions'=>array('view','index','admin'),	
-						"roles"=>array('admin'),				
-					),																
-					array('allow',  			 						
-						'actions'=>array('view','create','update','delete','index','admin'),	
-						"roles"=>array('hogar'),				
-					),	
-					array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-			
-		);
-	}
 
 	/**
 	 * Displays a particular model.
@@ -61,16 +38,17 @@ class ArriendaController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Arrienda;
+		$model=new Visitas;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Arrienda']))
+		if(isset($_POST['Visitas']))
 		{
-			$model->attributes=$_POST['Arrienda'];
+			$model->attributes=$_POST['Visitas'];
+			$model->CON_RUT=yii::app()->user->id;
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->FECHA));
+				$this->redirect(array('view','id'=>$model->VIS_CORREL));
 		}
 
 		$this->render('create',array(
@@ -90,11 +68,11 @@ class ArriendaController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Arrienda']))
+		if(isset($_POST['Visitas']))
 		{
-			$model->attributes=$_POST['Arrienda'];
+			$model->attributes=$_POST['Visitas'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->FECHA));
+				$this->redirect(array('view','id'=>$model->VIS_CORREL));
 		}
 
 		$this->render('update',array(
@@ -121,30 +99,18 @@ class ArriendaController extends Controller
 	 */
 	public function actionIndex()
 	{
-	if(isset($_POST['Arrienda']))
-		{
-	
+		
 	$user= yii::app()->user->id;
-	//$com= yii::app()->user->comunidad;
-	if( yii::app()->user->checkAccess("hogar") ){
-		$dataProvider=new CActiveDataProvider('Arrienda', array(
+	$com= yii::app()->user->comunidad;	
+	
+		$dataProvider=new CActiveDataProvider('Visitas', array(
     'criteria'=>array(
-        'condition'=>"HOG_N_USUARIO = '$user'",               
+        'condition'=>"COM_CORREL = '$com'",               
     	),
     ));
-		
-		}else{
-		$dataProvider=new CActiveDataProvider('Arrienda');
-		
-		}
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
-		
-		}else{
-		$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-		
-		}
 	}
 
 	/**
@@ -152,10 +118,10 @@ class ArriendaController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Arrienda('search');
+		$model=new Visitas('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Arrienda']))
-			$model->attributes=$_GET['Arrienda'];
+		if(isset($_GET['Visitas']))
+			$model->attributes=$_GET['Visitas'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -166,12 +132,12 @@ class ArriendaController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Arrienda the loaded model
+	 * @return Visitas the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Arrienda::model()->findByPk($id);
+		$model=Visitas::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -179,11 +145,11 @@ class ArriendaController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Arrienda $model the model to be validated
+	 * @param Visitas $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='arrienda-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='visitas-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

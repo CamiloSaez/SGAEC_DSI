@@ -33,6 +33,12 @@
 		<?php echo $form->error($model,'ESP_DESCRIPCION'); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model,'ESP_VALOR'); ?>
+		<?php echo $form->textField($model,'ESP_VALOR',array('size'=>60,'maxlength'=>100, 'class'=>'peso')); ?>
+		<?php echo $form->error($model,'ESP_VALOR'); ?>
+	</div>
+	
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Crear' : 'Guardar'); ?>
 	</div>

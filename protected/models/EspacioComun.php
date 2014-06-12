@@ -37,6 +37,7 @@ class EspacioComun extends CActiveRecord
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('ESP_CORREL, TIP_CORREL, ESP_DESCRIPCION', 'safe', 'on'=>'search'),
+			array('ESP_VALOR', 'numerical'),
 		);
 	}
 
@@ -50,6 +51,7 @@ class EspacioComun extends CActiveRecord
 		return array(
 			'hOGARs' => array(self::MANY_MANY, 'HOGAR', 'ARRIENDA(ESP_CORREL, HOG_N_USUARIO)'),
 			'tIPCORREL' => array(self::BELONGS_TO, 'TipoEspComun', 'TIP_CORREL'),
+			'aDMRUT' => array(self::BELONGS_TO, 'Administrador', 'ADM_RUT'),
 		);
 	}
 
@@ -62,6 +64,8 @@ class EspacioComun extends CActiveRecord
 			'ESP_CORREL' => 'Identificador espacio común',
 			'TIP_CORREL' => 'Tipo de espacio común',
 			'ESP_DESCRIPCION' => 'Descripción',
+			'ESP_VALOR'=>'Valor',
+			'ADM_RUT' => 'Identificador admin',
 		);
 	}
 
@@ -86,7 +90,7 @@ class EspacioComun extends CActiveRecord
 		$criteria->compare('ESP_CORREL',$this->ESP_CORREL);
 		$criteria->compare('tIPCORREL.TIP_NOMBRE',$this->TIP_CORREL, true);
 		$criteria->compare('ESP_DESCRIPCION',$this->ESP_DESCRIPCION,true);
-
+		$criteria->compare('ADM_RUT',yii::app()->user->id,true);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

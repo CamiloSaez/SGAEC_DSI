@@ -56,7 +56,7 @@ class Visitas extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'hOGNUSUARIO' => array(self::BELONGS_TO, 'HOGAR', 'HOG_N_USUARIO'),
-			'cONRUT' => array(self::BELONGS_TO, 'CONSERJE', 'CON_RUT'),
+			'cONRUT' => array(self::BELONGS_TO, 'Conserje', 'CON_RUT'), //Relación con conserje
 			'vEHCORREL' => array(self::BELONGS_TO, 'VEHICULOS', 'VEH_CORREL'),
 		);
 	}

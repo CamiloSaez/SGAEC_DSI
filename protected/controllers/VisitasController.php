@@ -19,31 +19,32 @@ class VisitasController extends Controller
 		);
 	}
 
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
-	 */
-	public function accessRules()
+
+		public function accessRules()
 	{
-		return array(
+		return array(				
+
+/******************Faltas*************************/
+			array('allow',  // allow all users to perform 'index' and 'view' actions				 				
+				"roles"=>array('conserje'),				
+			),			
+			
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'actions'=>array('index'),				
+				"roles"=>array('hogar'),
+			),			
+
+			array('allow',  // allow all users to perform 'index' and 'view' actions				
+				"roles"=>array('admin'),
 			),
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
-			),
+
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
+		
 		);
 	}
+
 
 	/**
 	 * Displays a particular model.
@@ -123,7 +124,30 @@ class VisitasController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Visitas');
+		
+	$user= yii::app()->user->id;
+	$com= yii::app()->user->comunidad;	
+	
+	
+    if( yii::app()->user->checkAccess("conserje") ){
+		$dataProvider=new CActiveDataProvider('Visitas', array(
+		'criteria'=>array(
+			'condition'=>"CON_RUT = '$user'",               
+			),
+		));
+	}else{
+		if( yii::app()->user->checkAccess("admin") ){
+			$dataProvider=new CActiveDataProvider('Visitas');
+		}else{
+			$dataProvider=new CActiveDataProvider('Visitas', array(
+			'criteria'=>array(
+			'condition'=>"HOG_N_USUARIO = '$user'",               
+			),
+		));
+		}
+	}
+	
+		
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));

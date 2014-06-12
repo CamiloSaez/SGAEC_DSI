@@ -1,4 +1,4 @@
-<div class="span8">
+﻿<div class="span8">
 
 <div class="span8">
 
@@ -33,11 +33,10 @@ $('.search-form form').submit(function(){
 <h1>Administrar Arriendas</h1>
 
 <p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
+Aquí usted podrá modificar, eliminar o ver alguno de sus arriendos
 </p>
 
-<?php echo CHtml::link('B�squeda avanzada','#',array('class'=>'search-button')); ?>
+<?php echo CHtml::link('Búsqueda avanzada','#',array('class'=>'search-button')); ?>
 <div class="search-form" style="display:none">
 <?php $this->renderPartial('_search',array(
 	'model'=>$model,

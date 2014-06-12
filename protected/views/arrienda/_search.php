@@ -13,10 +13,7 @@
 	'method'=>'get',
 )); ?>
 
-	<div class="row">
-		<?php echo $form->label($model,'HOG_N_USUARIO'); ?>
-		<?php echo $form->textField($model,'HOG_N_USUARIO',array('size'=>60,'maxlength'=>100)); ?>
-	</div>
+
 
 	<div class="row">
 		<?php echo $form->label($model,'ESP_CORREL'); ?>

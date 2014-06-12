@@ -24,7 +24,7 @@
 	<div class="row">
 		<!-- Rut de la visita. Ingresa el conserje-->
 		<?php echo $form->labelEx($model,'VIS_RUT'); ?>
-		<?php echo $form->textField($model,'VIS_RUT',array('size'=>12,'maxlength'=>12,'class'=>'rut')); ?>
+		<?php echo $form->textField($model,'VIS_RUT',array('id'=>'rut_demo_5','size'=>12,'maxlength'=>12)); ?>
 		<?php echo $form->error($model,'VIS_RUT'); ?>
 	</div>
 
