@@ -22,7 +22,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'Tipo de falta'); ?>
-		<?php echo $form->dropDownList($model,'TFAL_CORREL',CHtml::listData(TipoFalta::model()->findAll(),'TFAL_CORREL','TFAL_NOMBRE')); 	?>		
+		<?php echo $form->dropDownList($model,'TFAL_CORREL',CHtml::listData(TipoFalta::model()->findAll("COM_CORREL=?", array(Yii::app()->user->comunidad)),'TFAL_CORREL','TFAL_NOMBRE')); 	?>		
 		<?php echo $form->error($model,'TFAL_CORREL'); ?>
 
 	</div>		
@@ -40,14 +40,18 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'Numero de hogar'); ?>
-		<?php echo $form->dropDownList($model,'HOG_N_USUARIO',CHtml::listData(Hogar::model()->findAll(array('order'=>'HOG_N_HOGAR')),'HOG_N_USUARIO','HOG_N_HOGAR')); 	?>
+		<?php 
+		$com = Yii::app()->user->comunidad;
+		//$h = Hogar::model()->findAll(array('select'=>'HOG_N_USUARIO, HOG_N_HOGAR', 'condition'=>'COM_CORREL= $com'));
+		//$h = Hogar::model()->find("COM_CORREL=?", array(Yii::app()->user->comunidad));
+		echo $form->dropDownList($model,'HOG_N_USUARIO',CHtml::listData(Hogar::model()->findAll("COM_CORREL=?", array(Yii::app()->user->comunidad),array('order'=>'HOG_N_HOGAR')),'HOG_N_USUARIO','HOG_N_HOGAR')); 	?>
 		<?php // echo $form->textField($model,'HOG_N_USUARIO',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'HOG_N_USUARIO'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'Descripcion de la falta'); ?>
-		<?php echo $form->textField($model,'FAL_DESCRIPCION',array('size'=>60,'maxlength'=>1024)); ?>
+		<?php echo $form->textArea($model,'FAL_DESCRIPCION',array('size'=>60,'maxlength'=>1024, 'rows' => 4, 'cols' => 10)); ?>
 		<?php echo $form->error($model,'FAL_DESCRIPCION'); ?>
 	</div>
 
@@ -55,10 +59,13 @@
 		<?php echo $form->labelEx($model,'Fecha en que fue realizada'); ?>
 
 
-		<?php echo $this->renderPartial('application.views.calendario.fecha', array('model'=>$model,'name'=>'FAL_FECHA')); /*  ?>        	
+			<?php /* echo $this->renderPartial('application.views.calendario.fecha', array('model'=>$model,'name'=>'FAL_FECHA')); /*  ?>        	
 	       <input type="text" name="datepicker" id="datepicker" readonly="readonly" size="12" />
            </form>
 		<?php echo $form->textField($model,'FAL_FECHA');   */        ?>
+
+		<?php echo $form->textField($model,'FAL_FECHA',array('class'=>'datetimepicker3')); ?>
+		
 
 
 		<?php echo $form->error($model,'FAL_FECHA'); ?>

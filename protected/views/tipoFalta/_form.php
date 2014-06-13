@@ -1,3 +1,4 @@
+
 <?php
 /* @var $this TipoFaltaController */
 /* @var $model TipoFalta */
@@ -15,9 +16,10 @@
 	'enableAjaxValidation'=>false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="note">Campos con <span class="required">*</span> son requeridos.</p>
 
 	<?php echo $form->errorSummary($model); ?>
+   <div class="span8">
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'TFAL_NOMBRE'); ?>
@@ -27,14 +29,16 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'TFAL_MONTO'); ?>
-		<?php echo $form->textField($model,'TFAL_MONTO'); ?>
+		<?php echo $form->textField($model,'TFAL_MONTO', array('onkeypress' =>'return solonum(event)')); ?>
 		<?php echo $form->error($model,'TFAL_MONTO'); ?>
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Registrar' : 'Guardar'); ?>
 	</div>
 
+    </div>
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+

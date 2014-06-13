@@ -34,7 +34,7 @@ class ArriendaController extends Controller
 						"roles"=>array('admin'),				
 					),																
 					array('allow',  			 						
-						'actions'=>array('view','create','update','delete','index','admin'),	
+						'actions'=>array('view','create','update','delete','index','admin','error'),	
 						"roles"=>array('hogar'),				
 					),	
 					array('deny',  // deny all users
@@ -54,11 +54,17 @@ class ArriendaController extends Controller
 			'model'=>$this->loadModel($id),
 		));
 	}
-
+	/**
+	Error
+	*/
+	public function actionError(){
+		$this->render('error');
+	}
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
+	
 	public function actionCreate()
 	{
 		$model=new Arrienda;
@@ -69,10 +75,28 @@ class ArriendaController extends Controller
 		if(isset($_POST['Arrienda']))
 		{
 			$model->attributes=$_POST['Arrienda'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->FECHA));
+				$e=$model->ESP_CORREL;
+				$f=$model->FECHA;
+		
+			//Verificar si existe o no el arriendo
+			$criteria=new CDbCriteria;
+			$criteria->condition = "ESP_CORREL = '$e' AND FECHA ='$f'";
+			$var=Arrienda::model()->findAll($criteria);
+			$r=false;
+			foreach($var as $d){
+				$r=true;
+			}
+			
+			if( yii::app()->user->checkAccess("hogar")&&!$r){
+				$user= yii::app()->user->id;
+				$model->HOG_N_USUARIO=yii::app()->user->id;
+				if($model->save())
+					$this->redirect(array('admin'));
+			}else{
+				$this->redirect(array('error'));
+			}
 		}
-
+		
 		$this->render('create',array(
 			'model'=>$model,
 		));
@@ -134,7 +158,12 @@ class ArriendaController extends Controller
     ));
 		
 		}else{
-		$dataProvider=new CActiveDataProvider('Arrienda');
+		$com= yii::app()->user->comunidad;
+		$dataProvider=new CActiveDataProvider('Arrienda', array(
+			'criteria'=>array(
+				'condition'=>"HOG_N_USUARIO IN(SELECT HOG_N_USUARIO FROM HOGAR WHERE COM_CORREL='$com')",               
+				),
+			));
 		
 		}
 		$this->render('index',array(
@@ -156,9 +185,30 @@ class ArriendaController extends Controller
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['Arrienda']))
 			$model->attributes=$_GET['Arrienda'];
-
+			
+		
+		$user= yii::app()->user->id;
+		
+		if( yii::app()->user->checkAccess("hogar") ){
+			$dataProvider=new CActiveDataProvider('Arrienda', array(
+			'criteria'=>array(
+			'condition'=>"HOG_N_USUARIO = '$user'",               
+			),
+		));
+		
+		}else{
+		$com= yii::app()->user->comunidad;
+		$dataProvider=new CActiveDataProvider('Arrienda',array(
+			'criteria'=>array(
+				'condition'=>"HOG_N_USUARIO IN(SELECT HOG_N_USUARIO FROM HOGAR WHERE COM_CORREL='$com')",               
+				),
+			));
+		
+		}
+		
 		$this->render('admin',array(
 			'model'=>$model,
+			'dataProvider'=>$dataProvider,
 		));
 	}
 

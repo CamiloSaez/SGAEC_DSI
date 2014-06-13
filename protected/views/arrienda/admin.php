@@ -10,11 +10,11 @@ $this->breadcrumbs=array(
 	'Arriendas'=>array('index'),
 	'Administrar',
 );
-
+if( yii::app()->user->checkAccess("hogar") ){
 $this->menu=array(
-	array('label'=>'Listarar Arrienda', 'url'=>array('index')),
-	array('label'=>'Crear Arrienda', 'url'=>array('create')),
+	array('label'=>'Arrendar', 'url'=>array('create')),
 );
+}
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -43,19 +43,35 @@ Aquí usted podrá modificar, eliminar o ver alguno de sus arriendos
 )); ?>
 </div><!-- search-form -->
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'arrienda-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'HOG_N_USUARIO',
-		'ESP_CORREL',
-		'FECHA',
-		array(
-			'class'=>'CButtonColumn',
-		),
-	),
-)); ?>
+<?php 
+	if( yii::app()->user->checkAccess("hogar") ){
+			$this->widget('zii.widgets.grid.CGridView', array(
+			'id'=>'arrienda-grid',
+			'dataProvider'=>$dataProvider,
+			'filter'=>$model,
+			'columns'=>array(
+				'ESP_CORREL',
+				'FECHA',
+				array(
+					'class'=>'CButtonColumn',
+				),
+			),
+		));
+	}else{
+			$this->widget('zii.widgets.grid.CGridView', array(
+			'id'=>'arrienda-grid',
+			'dataProvider'=>$dataProvider,
+			'filter'=>$model,
+			'columns'=>array(
+				'HOG_N_USUARIO',	
+				'ESP_CORREL',
+				'FECHA',
+			),
+		));
+	
+	}
+
+	 ?>
 
 </div>
 

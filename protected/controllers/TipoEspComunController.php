@@ -56,7 +56,7 @@ class TipoEspComunController extends Controller
 		if(isset($_POST['TipoEspComun']))
 		{
 			$model->attributes=$_POST['TipoEspComun'];
-			$model->COM_CORREL=yii::app()->user->comunidad;
+			$model->ADM_RUT=yii::app()->user->id;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->TIP_CORREL));
 		}

@@ -23,19 +23,21 @@
    <div class="span8">
    <div class="span8">
 
+   <!--
 	<div class="row">
-		<?php echo $form->labelEx($model,'HOG_N_USUARIO'); ?>
-		<?php echo $form->dropDownList($model,'HOG_N_USUARIO',CHtml::listData(Hogar::model()->findAll(array('order'=>'HOG_N_HOGAR')),'HOG_N_USUARIO','HOG_N_HOGAR'));?>
-		<?php echo $form->error($model,'HOG_N_USUARIO'); ?>
+		<?php //echo $form->labelEx($model,'HOG_N_USUARIO'); ?>
+		<?php //echo $form->dropDownList($model,'HOG_N_USUARIO',CHtml::listData(Hogar::model()->findAll(array('order'=>'HOG_N_HOGAR')),'HOG_N_USUARIO','HOG_N_HOGAR'));?>
+		<?php //echo $form->error($model,'HOG_N_USUARIO'); ?>
 	</div>
+	-->
 
-	<div class="row">
+	<div class="row" title="Espacio que desea arrendar">
 		<?php echo $form->labelEx($model,'ESP_CORREL'); ?>
 		<?php echo $form->dropDownList($model,'ESP_CORREL',CHtml::listData(EspacioComun::model()->findAll(array('order'=>'ESP_DESCRIPCION')),'ESP_CORREL','ESP_DESCRIPCION'));?>
 		<?php echo $form->error($model,'ESP_CORREL'); ?>
 	</div>
 
-	<div class="row">
+	<div class="row" title="Fecha en la que desea arrendar">
 		<?php echo $form->labelEx($model,'FECHA'); ?>
 		<?php echo $form->textField($model,'FECHA',array('class'=>'datetimepicker2')); ?>
 		<?php echo $form->error($model,'FECHA'); ?>

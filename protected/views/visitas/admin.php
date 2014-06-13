@@ -9,10 +9,14 @@ $this->breadcrumbs=array(
 	'Administrar',
 );
 
+if(!yii::app()->user->checkAccess("hogar") ){
 $this->menu=array(
 	array('label'=>'Listar Visitas', 'url'=>array('index')),
 	array('label'=>'Crear Visitas', 'url'=>array('create')),
 );
+}
+
+
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
@@ -46,11 +50,13 @@ Aquí usted podrá modificar, eliminar o ver las visitas de la comunidad.
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'VIS_CORREL',
 		'VIS_RUT',
 		'VEH_CORREL',
 		'CON_RUT',
-		'HOG_N_USUARIO',
+		array(
+                        'name'=>'HOG_N_USUARIO',
+                        'value'=>'$data->hOGNUSUARIO->HOG_N_HOGAR', // Poner nombre relación seguida por atributo.
+                ),
 		'VIS_NOMBRE',
 		/*
 		'VIS_APELLIDOS',

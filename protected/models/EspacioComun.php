@@ -30,14 +30,14 @@ class EspacioComun extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('TIP_CORREL', 'required'),
+			array('TIP_CORREL, ESP_DESCRIPCION, ESP_VALOR', 'required'),
 			array('TIP_CORREL', 'numerical', 'integerOnly'=>true),
-			array('ESP_DESCRIPCION', 'length', 'max'=>200),
+			array('ESP_DESCRIPCION', 'length', 'min'=>4,'max'=>200),
 			array('ESP_DESCRIPCION', 'match', 'pattern'=>'/^[a-z0-9Ã¡Ã©Ã­Ã³ÃºÃ±\s]+./i','message'=>'La descripción debe poseer al menos una letra y/o número al inicio'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('ESP_CORREL, TIP_CORREL, ESP_DESCRIPCION', 'safe', 'on'=>'search'),
-			array('ESP_VALOR', 'numerical'),
+			array('ESP_VALOR', 'numerical','max'=>100000,'min'=>0,'tooSmall'=>'El valor debe ser mayor o igual a 0', 'tooBig'=>'El valor debe ser igual o menor a 100000'),
 		);
 	}
 
@@ -51,7 +51,7 @@ class EspacioComun extends CActiveRecord
 		return array(
 			'hOGARs' => array(self::MANY_MANY, 'HOGAR', 'ARRIENDA(ESP_CORREL, HOG_N_USUARIO)'),
 			'tIPCORREL' => array(self::BELONGS_TO, 'TipoEspComun', 'TIP_CORREL'),
-			'aDMRUT' => array(self::BELONGS_TO, 'Administrador', 'ADM_RUT'),
+			'aDMRUT' => array(self::BELONGS_TO, 'Comunidad', 'COM_CORREL'),
 		);
 	}
 
@@ -64,8 +64,8 @@ class EspacioComun extends CActiveRecord
 			'ESP_CORREL' => 'Identificador espacio común',
 			'TIP_CORREL' => 'Tipo de espacio común',
 			'ESP_DESCRIPCION' => 'Descripción',
-			'ESP_VALOR'=>'Valor',
-			'ADM_RUT' => 'Identificador admin',
+			'ESP_VALOR'=>'Valor (CL$ por hora)',
+			'COM_CORREL' => 'Identificador admin',
 		);
 	}
 
@@ -90,7 +90,7 @@ class EspacioComun extends CActiveRecord
 		$criteria->compare('ESP_CORREL',$this->ESP_CORREL);
 		$criteria->compare('tIPCORREL.TIP_NOMBRE',$this->TIP_CORREL, true);
 		$criteria->compare('ESP_DESCRIPCION',$this->ESP_DESCRIPCION,true);
-		$criteria->compare('ADM_RUT',yii::app()->user->id,true);
+		$criteria->compare('COM_CORREL',yii::app()->user->comunidad,true);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));

@@ -86,7 +86,7 @@ class Comunidad extends CActiveRecord
 	//Funcion para validar que sea número o letra 
 	 public function validarNumeroLetra($atribute, $params) {
 				$nombre=$this->COM_NOMBRE;
-				$patron="/^([a-zA-Z0-9]|[[:space:]])+$/";//Exp. Reg. que debe aplicarse.
+				$patron="/^([a-zA-Z0-9Ã¡Ã©Ã­Ã³ÃºÃ±]|[[:space:]])+$/";//Exp. Reg. que debe aplicarse.
 				//Si encuentra un string distinto a los señalados muestra un error.
 				if(!preg_match($patron, $nombre)){
 					$this->addError('COM_NOMBRE', 'Nombre no válido');
@@ -99,7 +99,7 @@ class Comunidad extends CActiveRecord
 				//Primero debe ir o una letra o un número
 				//Luego puede o no ir un #
 				if(!empty($nombre)){
-				$patron="/^([[:alnum:]])([[:alnum:]]|[[:space:]]|,)*((#)?[[:digit:]])?([[:alnum:]]|[[:space:]]|,)*$/";
+				$patron="/^([[a-z0-9Ã¡Ã©Ã­Ã³ÃºÃ±]])([[:alnum:]]|[[:space:]]|,)*((#)?[[:digit:]])?([[:alnum:]]|[[:space:]]|,)*$/";
 				
 				//Si encuentra un string distinto a los señalados muestra un error.
 				if(!preg_match($patron, $nombre)){

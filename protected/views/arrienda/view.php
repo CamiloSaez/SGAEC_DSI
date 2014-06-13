@@ -10,9 +10,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listarar Arrienda', 'url'=>array('index')),
 	array('label'=>'Crear Arrienda', 'url'=>array('create')),
-	array('label'=>'Actualizar Arrienda', 'url'=>array('update', 'id'=>$model->FECHA)),
 	array('label'=>'Eliminar Arrienda', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->FECHA),'confirm'=>'Are you sure you want to delete this item?')),
 	array('label'=>'Administrar Arrienda', 'url'=>array('admin')),
 );

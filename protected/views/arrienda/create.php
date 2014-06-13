@@ -10,8 +10,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Listarar Arrienda', 'url'=>array('index')),
-	array('label'=>'Administrar Arrienda', 'url'=>array('admin')),
+	array('label'=>'Administrar Arriendos', 'url'=>array('admin')),
 );
 ?>
 

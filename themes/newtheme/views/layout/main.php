@@ -49,7 +49,21 @@
 <!-- Menu
       ================================================== -->
 
-			<?php $this->widget('zii.widgets.CMenu',array(
+			<?php 
+			
+			$nombre="";
+			if(isset(yii::app()->user->comunidad)){
+				$nCom=yii::app()->user->comunidad;
+				if(!empty($nCom)){
+					$comu=Comunidad::model()->findall("COM_CORREL=$nCom");
+					foreach($comu as $d){
+						$nombre='('.$d->COM_NOMBRE.')';
+						}
+					}
+					
+			}
+			
+			$this->widget('zii.widgets.CMenu',array(
 			'htmlOptions'=>array("class"=>"nav"),
 			'items'=>array(
 				array('label'=>'Inicio', 'url'=>array('/site/index')), //Controlador/Accion  ej site/index
@@ -60,7 +74,7 @@
 				array('label'=>'Contacto', 'url'=>array('/site/contact'), 'visible'=> Yii::app()->user->isGuest),
 				
 				array('label'=>'Iniciar Sesión', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
-				array('label'=>'Comunidad', 'url'=>array('/Comunidad/'), 'visible'=>yii::app()->user->checkAccess("admin")),
+				array('label'=>'Comunidad '.$nombre, 'url'=>array('/Comunidad/'), 'visible'=>yii::app()->user->checkAccess("admin")),
 				
 				array('label'=>'Cambiar Clave', 'url'=>array('/cambclave'), 'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Cerrar Sesión', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)

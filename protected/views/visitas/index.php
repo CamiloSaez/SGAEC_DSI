@@ -7,11 +7,14 @@
 $this->breadcrumbs=array(
 	'Visitases',
 );
-
+if(!yii::app()->user->checkAccess("hogar") ){
 $this->menu=array(
 	array('label'=>'Crear Visitas', 'url'=>array('create')),
 	array('label'=>'Administrar Visitas', 'url'=>array('admin')),
 );
+}
+
+
 ?>
 
 <h1>Visitas</h1>

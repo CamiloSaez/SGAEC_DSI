@@ -12,7 +12,7 @@ $this->menu=array(
 	array('label'=>'Listar Espacios Comunes', 'url'=>array('index')),
 	array('label'=>'Crear Espacio Común', 'url'=>array('create')),
 	array('label'=>'Actualizar Espacio Común', 'url'=>array('update', 'id'=>$model->ESP_CORREL)),
-	array('label'=>'Eliminar Espacio Común', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->ESP_CORREL),'confirm'=>'Are you sure you want to delete this item?')),
+	array('label'=>'Eliminar Espacio Común', 'url'=>'#', 'linkOptions'=>array('submit'=>array('delete','id'=>$model->ESP_CORREL),'confirm'=>'¿Estas seguro que deseas eliminar el espacio común?')),
 	array('label'=>'Administrar Espacio Común', 'url'=>array('admin')),
 );
 ?>
@@ -23,7 +23,6 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'ESP_CORREL',
-		'TIP_CORREL',
 		'ESP_DESCRIPCION',
 	),
 )); ?>

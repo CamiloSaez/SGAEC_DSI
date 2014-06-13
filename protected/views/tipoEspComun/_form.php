@@ -21,7 +21,7 @@
 	<?php echo $form->errorSummary($model); ?>
    <div class="span8">
 
-	<div class="row">
+	<div class="row" title="Nombre genérico del espacio común (ej. Quincho)">
 		<?php echo $form->labelEx($model,'TIP_NOMBRE'); ?>
 		<?php echo $form->textField($model,'TIP_NOMBRE',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'TIP_NOMBRE'); ?>

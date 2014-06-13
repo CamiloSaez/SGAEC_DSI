@@ -1,3 +1,7 @@
+<div class="span8">
+
+
+<div class="span8">
 <?php
 /* @var $this FaltaController */
 /* @var $model Falta */
@@ -45,7 +49,7 @@ Aquí usted podrá modificar, eliminar o ver faltas emitidas en su comunidad.
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'FAL_CORREL',
+//		'FAL_CORREL',
 //		'TFAL_CORREL',
 		'CON_RUT',
 		'HOG_N_USUARIO',
@@ -56,3 +60,7 @@ Aquí usted podrá modificar, eliminar o ver faltas emitidas en su comunidad.
 		),
 	),
 )); ?>
+
+</div>
+
+</div>

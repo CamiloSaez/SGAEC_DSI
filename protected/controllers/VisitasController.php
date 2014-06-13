@@ -24,7 +24,7 @@ class VisitasController extends Controller
 	{
 		return array(				
 
-/******************Faltas*************************/
+/******************Visitas*************************/
 			array('allow',  // allow all users to perform 'index' and 'view' actions				 				
 				"roles"=>array('conserje'),				
 			),			
@@ -137,7 +137,11 @@ class VisitasController extends Controller
 		));
 	}else{
 		if( yii::app()->user->checkAccess("admin") ){
-			$dataProvider=new CActiveDataProvider('Visitas');
+			$dataProvider=new CActiveDataProvider('Visitas', array(
+			'criteria'=>array(
+			'condition'=>"HOG_N_USUARIO IN(SELECT HOG_N_USUARIO FROM HOGAR WHERE COM_CORREL='$com')",               
+			),
+		));
 		}else{
 			$dataProvider=new CActiveDataProvider('Visitas', array(
 			'criteria'=>array(

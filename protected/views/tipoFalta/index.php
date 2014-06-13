@@ -1,3 +1,5 @@
+<div class="span8">
+
 <?php
 /* @var $this TipoFaltaController */
 /* @var $dataProvider CActiveDataProvider */
@@ -7,8 +9,8 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
-	array('label'=>'Create TipoFalta', 'url'=>array('create')),
-	array('label'=>'Manage TipoFalta', 'url'=>array('admin')),
+	array('label'=>'Crear TipoFalta', 'url'=>array('create')),
+	array('label'=>'Administrar TipoFalta', 'url'=>array('admin')),
 );
 ?>
 
@@ -18,3 +20,5 @@ $this->menu=array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 )); ?>
+
+</div>

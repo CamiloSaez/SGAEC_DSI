@@ -31,9 +31,10 @@ class Arrienda extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('HOG_N_USUARIO, ESP_CORREL', 'required'),
+			array('HOG_N_USUARIO, ESP_CORREL, FECHA', 'required'),
 			array('ESP_CORREL', 'numerical', 'integerOnly'=>true),
 			array('HOG_N_USUARIO', 'length', 'max'=>100),
+			array('FECHA', 'match', 'pattern'=>'/[0-9]{4}.[0-1]{1}[0-9]{1}.[0-3]{1}[0-9]{1}[[:space:]][0-9]{2}.[0]{2}/','message'=>'Por favor ingrese fecha correcta.'),
 			array('FECHA', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -41,6 +42,16 @@ class Arrienda extends CActiveRecord
 		);
 	}
 
+	/**
+	Nos dice si existe un arriendo para esa hora.
+	*/
+	public function ExisteArriendo()
+	{
+	
+	}
+	
+	
+	
 	/**
 	 * @return array relational rules.
 	 */

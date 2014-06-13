@@ -1,3 +1,4 @@
+
 <?php
 /* @var $this TipoFaltaController */
 /* @var $model TipoFalta */
@@ -27,9 +28,10 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Search'); ?>
+		<?php echo CHtml::submitButton('Buscar'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
 
 </div><!-- search-form -->
+

@@ -35,12 +35,16 @@
 		<?php echo $form->label($model,'COM_N_HOGARES'); ?>
 		<?php echo $form->textField($model,'COM_N_HOGARES'); ?>
 	</div>
-
+<!--
 	<div class="row">
-		<?php echo $form->label($model,'COMU_ID'); ?>
-		<?php echo $form->textField($model,'COMU_ID',array('size'=>60,'maxlength'=>100)); ?>
+		<?php 
+		//echo $form->label($model,'COMU_ID'); 
+		?>
+		<?php 
+		//echo $form->textField($model,'COMU_ID',array('size'=>60,'maxlength'=>100)); 
+		?>
 	</div>
-
+-->
 	<div class="row">
 		<?php echo $form->label($model,'COM_TELEFONO'); ?>
 		<?php echo $form->textField($model,'COM_TELEFONO',array('size'=>10,'maxlength'=>10)); ?>

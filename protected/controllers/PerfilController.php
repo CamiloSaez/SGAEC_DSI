@@ -19,17 +19,18 @@ class PerfilController extends Controller
     if(Yii::app()->user->getState("comunidad")!=null){
 		$menuLateral='
 		<li class="nav-header">Opciones</li>                
+              <li><a href="index.php?r=archivo">Archivos</a></li>
+              <li><a href="index.php?r=arrienda/admin">Administrar arriendos</a></li>
               <li><a href="index.php?r=hogar" title="Administrar hogares">Hogares</a></li>
               <li><a href="index.php?r=conserje" title="Administrar conserjes">Conserje</a></li>
-              <li><a href="index.php?r=trabajador">Trabajadores</a></li>
-              <li><a href="#">Turnos</a></li>
-              <li><a href="index.php?r=archivo">Archivos</a></li>
-              <li><a href="index.php?r=espacioComun">Crear espacio común</a></li>
-              <li><a href="index.php?r=falta">Revisar Faltas</a></li>
-              <li><a href="index.php?r=tipoFalta">Crear tipo de falta</a></li>   
-              <li><a href="#">Gastos comunes</a></li>
               <li><a href="#">Boleta remuneraciones</a></li>
+              <li><a href="index.php?r=espacioComun">Administrar espacio común</a></li> 
+              <li><a href="index.php?r=tipoEspComun">Administrar tipo de espacio común</a></li> 
+              <li><a href="index.php?r=tipoFalta">Crear tipo de falta</a></li>  
               <li><a href="#">Encuesta satisfacción</a></li>
+              <li><a href="#">Gastos comunes</a></li>
+              <li><a href="index.php?r=falta">Revisar Faltas</a></li>
+              <li><a href="index.php?r=trabajador">Trabajadores</a></li>
               <li><a href="#">Reclamos y sugerencias</a></li>		
 			  ';		
             $fail=false;      
@@ -41,7 +42,7 @@ class PerfilController extends Controller
           ));
           }
     else {
-
+          $fail=false;  
          $com=Comunidad::model()->findall("ADM_RUT=?", array(yii::app()->user->id));
 
             $this->render('idCom',array(
@@ -61,16 +62,15 @@ class PerfilController extends Controller
              $cuerpo = '<p> Bienvenido señor/a '.Yii::app()->user->getState('nombre').' </p>';
 
               $menuLateral='
-              <li class="nav-header">Opciones</li>              
-              <li><a href="#">Gastos comunes</a></li>
-              <li><a href="index.php?r=falta">Consultar faltas</a></li>
-              <li><a href="#">Consultar visitas</a></li>
-              <li><a href="#">Reclamos y sugerencias</a></li>
-			  <li><a href="index.php?r=archivo">Archivos</a></li>
-			  <li><a href="#">Turnos</a></li>
-              <li><a href="#">Responder encuestas</a></li>
+              <li class="nav-header">Opciones</li>             
+			  <li><a href="index.php?r=archivo">Archivos</a></li> 
               <li><a href="index.php?r=arrienda">Arrendar espacio común</a></li>
-              <li><a href="#">Avisos clasificados</a></li>                      
+              <li><a href="#">Avisos clasificados</a></li>  
+              <li><a href="index.php?r=falta">Consultar faltas</a></li>
+              <li><a href="index.php?r=visitas">Consultar visitas</a></li>
+              <li><a href="#">Gastos comunes</a></li>
+              <li><a href="#">Reclamos y sugerencias</a></li>
+              <li><a href="#">Responder encuestas</a></li>                    
                        ';   
                $fail=false;        
                $this->render('index',array(
@@ -86,13 +86,12 @@ class PerfilController extends Controller
               $cuerpo = '<p> Bienvenido señor/a '.Yii::app()->user->getState('nombre').' </p>';
            
               $menuLateral='
-              <li class="nav-header">Opciones</li>                                     
+              <li class="nav-header">Opciones</li>     
+			  <li><a href="index.php?r=archivo">Archivos</a></li>  
+			  <li><a href="#">Correspondencia</a></li>                              
               <li><a href="index.php?r=falta">Faltas</a></li>
               <li><a href="index.php?r=visitas">Visitas</a></li>
               <li><a href="index.php?r=vehiculos">Vehículo</a></li>
-			  <li><a href="index.php?r=archivo">Archivos</a></li>
-			  <li><a href="#">Turnos</a></li>
-              <li><a href="#">Correspondencia</a></li>
                        ';
                $fail=false;        
                $this->render('index',array(

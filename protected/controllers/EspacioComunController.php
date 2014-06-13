@@ -19,9 +19,9 @@ public function accessRules()
 						'actions'=>array('view','create','update','delete','index','admin'),	
 						"roles"=>array('admin'),				
 					),						
-					array('deny',  // deny all users
-					'users'=>array('*'),
-					),
+				array('deny',  // deny all users
+				'users'=>array('*'),
+				),
 		);
 	}
 
@@ -56,7 +56,7 @@ public function accessRules()
 		if(isset($_POST['EspacioComun']))
 		{
 			$model->attributes=$_POST['EspacioComun'];
-			$model->ADM_RUT=yii::app()->user->id;
+			$model->COM_CORREL=yii::app()->user->id;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->ESP_CORREL));
 		}
@@ -109,7 +109,14 @@ public function accessRules()
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('EspacioComun');
+		
+		$com = yii::app()->user->comunidad;
+		$dataProvider=new CActiveDataProvider('EspacioComun', array(
+		'criteria'=>array(
+			'condition'=>"COM_CORREL = '$com'",               
+			),
+		));
+		
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));

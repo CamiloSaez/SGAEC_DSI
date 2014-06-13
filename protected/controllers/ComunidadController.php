@@ -12,6 +12,20 @@ class ComunidadController extends Controller
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
 	 */
+	 public function accessRules()
+	{
+		return array(				
+
+				array('allow',  			 						
+						'actions'=>array('view','create','update','delete','index','admin'),	
+						"roles"=>array('admin'),				
+					),						
+				array('deny',  // deny all users
+				'users'=>array('*'),
+				),
+		);
+	}
+	
 	public function actionView($id)
 	{
 		$this->render('view',array(

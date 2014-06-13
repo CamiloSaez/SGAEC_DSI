@@ -7,10 +7,6 @@
 <div class="span8">
    <div class="well">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('VIS_CORREL')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->VIS_CORREL), array('view', 'id'=>$data->VIS_CORREL)); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('VIS_RUT')); ?>:</b>
 	<?php echo CHtml::encode($data->VIS_RUT); ?>
 	<br />
@@ -19,13 +15,34 @@
 	<?php echo CHtml::encode($data->VEH_CORREL); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('CON_RUT')); ?>:</b>
-	<?php echo CHtml::encode($data->CON_RUT); ?>
-	<br />
+		<?php
+		if(!yii::app()->user->checkAccess("conserje") ){
+		?>
+		
+		<b><?php echo CHtml::encode($data->getAttributeLabel('CON_RUT')); ?>:</b>
+		<?php echo CHtml::encode($data->CON_RUT); ?>
+		<br />
+		
+		<?php
+		}
+	?>
+	
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('HOG_N_USUARIO')); ?>:</b>
-	<?php echo CHtml::encode($data->HOG_N_USUARIO); ?>
-	<br />
+	<?php
+		if(!yii::app()->user->checkAccess("hogar") ){
+		
+		?>
+			<b><?php echo CHtml::encode($data->getAttributeLabel('HOG_N_USUARIO')); ?>:</b>
+			<?php $var=$data->HOG_N_USUARIO;
+			$var=Hogar::model()->findAll("HOG_N_USUARIO='$var'");
+			foreach($var as $d){
+			echo $d->HOG_N_HOGAR;
+			}?>
+			<br />
+	<?php
+		}
+	?>
+
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('VIS_NOMBRE')); ?>:</b>
 	<?php echo CHtml::encode($data->VIS_NOMBRE); ?>

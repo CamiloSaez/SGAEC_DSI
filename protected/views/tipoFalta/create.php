@@ -1,18 +1,20 @@
+
 <?php
 /* @var $this TipoFaltaController */
 /* @var $model TipoFalta */
 
 $this->breadcrumbs=array(
 	'Tipo Faltas'=>array('index'),
-	'Create',
+	'Crear',
 );
 
 $this->menu=array(
-	array('label'=>'List TipoFalta', 'url'=>array('index')),
-	array('label'=>'Manage TipoFalta', 'url'=>array('admin')),
+	array('label'=>'Listar TipoFalta', 'url'=>array('index')),
+	array('label'=>'Administrar TipoFalta', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Create TipoFalta</h1>
+<h1>Crear TipoFalta</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
+

@@ -36,10 +36,12 @@ class Visitas extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('VIS_RUT, CON_RUT, HOG_N_USUARIO', 'required'),
+			array('VIS_RUT, CON_RUT, HOG_N_USUARIO, VIS_FECHA', 'required'),
 			array('VEH_CORREL', 'numerical', 'integerOnly'=>true),
-			array('VIS_RUT, CON_RUT', 'length', 'max'=>12),
-			array('HOG_N_USUARIO, VIS_NOMBRE, VIS_APELLIDOS', 'length', 'max'=>100),
+			array('VIS_RUT, CON_RUT', 'length', 'min'=>11, 'max'=>12),
+			array('HOG_N_USUARIO', 'length', 'max'=>100),
+			array('VIS_NOMBRE, VIS_APELLIDOS', 'length', 'min'=>3,'max'=>50),
+			array('VIS_NOMBRE, VIS_APELLIDOS', 'match', 'pattern'=>'/^[a-zÃ¡Ã©Ã­Ã³ÃºÃ±\s]+$/i','message'=>'Porfavor ingrese solo letras.'),
 			array('VIS_FECHA', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
@@ -55,7 +57,7 @@ class Visitas extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'hOGNUSUARIO' => array(self::BELONGS_TO, 'HOGAR', 'HOG_N_USUARIO'),
+			'hOGNUSUARIO' => array(self::BELONGS_TO, 'Hogar', 'HOG_N_USUARIO'),
 			'cONRUT' => array(self::BELONGS_TO, 'Conserje', 'CON_RUT'), //Relación con conserje
 			'vEHCORREL' => array(self::BELONGS_TO, 'VEHICULOS', 'VEH_CORREL'),
 		);
@@ -100,7 +102,7 @@ class Visitas extends CActiveRecord
 		$criteria->compare('VIS_RUT',$this->VIS_RUT,true);
 		$criteria->compare('VEH_CORREL',$this->VEH_CORREL);
 		$criteria->compare('CON_RUT',yii::app()->user->id,true);
-		$criteria->compare('HOG_N_USUARIO',$this->HOG_N_USUARIO,true);
+		$criteria->compare('hOGNUSUARIO.HOG_N_HOGAR',$this->HOG_N_USUARIO,true);
 		$criteria->compare('VIS_NOMBRE',$this->VIS_NOMBRE,true);
 		$criteria->compare('VIS_APELLIDOS',$this->VIS_APELLIDOS,true);
 		$criteria->compare('VIS_FECHA',$this->VIS_FECHA,true);

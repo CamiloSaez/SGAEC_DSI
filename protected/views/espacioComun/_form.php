@@ -21,19 +21,19 @@
 	<?php echo $form->errorSummary($model); ?>
    <div class="span8">
 
-	<div class="row">
+	<div class="row" title="Tipo de espacio">
 		<?php echo $form->labelEx(TipoEspComun::model(),'TIP_NOMBRE'); ?>
 		<?php echo $form->dropDownList($model,'TIP_CORREL', CHtml::listData(TipoEspComun::model()->findAll(array('order'=>'TIP_NOMBRE')),'TIP_CORREL', 'TIP_NOMBRE')); ?>
 		<?php echo $form->error($model,'TIP_CORREL'); ?>
 	</div>
 
-	<div class="row">
+	<div class="row" title="Describa brevemente el espacio para diferenciarlo de otros del mismo tipo">
 		<?php echo $form->labelEx($model,'ESP_DESCRIPCION'); ?>
 		<?php echo $form->textArea($model,'ESP_DESCRIPCION',array('rows' => 6, 'cols' => 50,'maxlength'=>1024)); ?>
 		<?php echo $form->error($model,'ESP_DESCRIPCION'); ?>
 	</div>
 
-	<div class="row">
+	<div class="row" title="Valor en pesos Chilenos por el arriendo de este espacio">
 		<?php echo $form->labelEx($model,'ESP_VALOR'); ?>
 		<?php echo $form->textField($model,'ESP_VALOR',array('size'=>60,'maxlength'=>100, 'class'=>'peso')); ?>
 		<?php echo $form->error($model,'ESP_VALOR'); ?>
