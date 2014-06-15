@@ -54,22 +54,17 @@ class ArriendaController extends Controller
 			'model'=>$this->loadModel($id),
 		));
 	}
-
-	
-	public function ExisteArriendo($esp, $fecha){
-		$criteria=new CDbCriteria;
-		$criteria->condition = "ESP_CORREL = '$esp' AND FECHA ='$fecha'";
-		$var=Arrienda::model()->findAll($criteria);
-		$r=false;
-		foreach($var as $d){
-			$r=true;
-		}
-		return $r;
+	/**
+	Error
+	*/
+	public function actionError(){
+		$this->render('error');
 	}
 	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
+	
 	public function actionCreate()
 	{
 		$model=new Arrienda;
@@ -80,24 +75,26 @@ class ArriendaController extends Controller
 		if(isset($_POST['Arrienda']))
 		{
 			$model->attributes=$_POST['Arrienda'];
-		
-		//El admin puede generara arriendo en caso de que el usuario no sepa como hacerlo??
-			if( yii::app()->user->checkAccess("hogar") ){
-			
-				$user= yii::app()->user->id;
 				$e=$model->ESP_CORREL;
 				$f=$model->FECHA;
-				
-				if(!ExisteArriendo($e, $f)){
-					$model->HOG_N_USUARIO=yii::app()->user->id;
-					if($model->save()) $this->redirect(array('admin'));
-				}else{
-					$this->redirect(array('error'));
-				}
-				}
-			if($model->save()){
-				$this->redirect(array('admin'));
-				}
+		
+			//Verificar si existe o no el arriendo
+			$criteria=new CDbCriteria;
+			$criteria->condition = "ESP_CORREL = '$e' AND FECHA ='$f'";
+			$var=Arrienda::model()->findAll($criteria);
+			$r=false;
+			foreach($var as $d){
+				$r=true;
+			}
+			
+			if( yii::app()->user->checkAccess("hogar")&&!$r){
+				$user= yii::app()->user->id;
+				$model->HOG_N_USUARIO=yii::app()->user->id;
+				if($model->save())
+					$this->redirect(array('admin'));
+			}else{
+				$this->redirect(array('error'));
+			}
 		}
 		
 		$this->render('create',array(
@@ -105,11 +102,6 @@ class ArriendaController extends Controller
 		));
 	}
 
-	/**
-	*/
-	public function actionError(){
-		$this->render('error');
-	}
 	/**
 	 * Updates a particular model.
 	 * If update is successful, the browser will be redirected to the 'view' page.

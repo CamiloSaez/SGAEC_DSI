@@ -7,16 +7,16 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Arriendas',
+	'Arriendos',
 );
 
 $this->menu=array(
-	array('label'=>'Crear Arrienda', 'url'=>array('create')),
-	array('label'=>'Administrar Arrienda', 'url'=>array('admin')),
+	array('label'=>'Crear Arriendo', 'url'=>array('create')),
+	array('label'=>'Administrar Arriendo', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Arriendas</h1>
+<h1>Arriendos</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

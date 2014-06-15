@@ -7,7 +7,7 @@
 /* @var $model Arrienda */
 
 $this->breadcrumbs=array(
-	'Arriendas'=>array('index'),
+	'Arriendos'=>array('index'),
 	'Administrar',
 );
 if( yii::app()->user->checkAccess("hogar") ){
@@ -30,7 +30,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Administrar Arriendas</h1>
+<h1>Administrar Arriendos</h1>
 
 <p>
 Aquí usted podrá modificar, eliminar o ver alguno de sus arriendos
@@ -50,7 +50,10 @@ Aquí usted podrá modificar, eliminar o ver alguno de sus arriendos
 			'dataProvider'=>$dataProvider,
 			'filter'=>$model,
 			'columns'=>array(
-				'ESP_CORREL',
+				array(
+                        'name'=>'ESP_CORREL',
+                        'value'=>'$data->eSPCORREL->ESP_DESCRIPCION', // reemplazar acá el campo del modelo Departamento que representa el nombre.
+                ),
 				'FECHA',
 				array(
 					'class'=>'CButtonColumn',
@@ -64,7 +67,10 @@ Aquí usted podrá modificar, eliminar o ver alguno de sus arriendos
 			'filter'=>$model,
 			'columns'=>array(
 				'HOG_N_USUARIO',	
-				'ESP_CORREL',
+				array(
+                        'name'=>'ESP_CORREL',
+                        'value'=>'$data->eSPCORREL->ESP_DESCRIPCION', // reemplazar acá el campo del modelo Departamento que representa el nombre.
+                ),
 				'FECHA',
 			),
 		));

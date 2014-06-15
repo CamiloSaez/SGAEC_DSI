@@ -46,7 +46,6 @@ Aquí usted podrá modificar, eliminar o ver alguno de sus espacios comunes.
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'ESP_CORREL',
 		array(
                         'name'=>'TIP_CORREL',
                         'value'=>'$data->tIPCORREL->TIP_NOMBRE', // reemplazar acá el campo del modelo Departamento que representa el nombre.

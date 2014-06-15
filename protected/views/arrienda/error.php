@@ -18,7 +18,7 @@ $this->menu=array(
 
 <h1>Error</h1>
 <p>
-Ya existe un arriendo. Intente con otra hora.
+Ya existe un arriendo o la hora no es válida. Intente con otra hora.
 </p>
 
 

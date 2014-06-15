@@ -5,7 +5,7 @@
 /* @var $model Arrienda */
 
 $this->breadcrumbs=array(
-	'Arriendas'=>array('index'),
+	'Arriendos'=>array('index'),
 	$model->FECHA,
 );
 
@@ -16,7 +16,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>View Arrienda #<?php echo $model->FECHA; ?></h1>
+<h1>Ver arriendo #<?php echo $model->FECHA; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data'=>$model,

@@ -5,7 +5,7 @@
 /* @var $model Arrienda */
 
 $this->breadcrumbs=array(
-	'Arriendas'=>array('index'),
+	'Arriendos'=>array('index'),
 	$model->FECHA=>array('view','id'=>$model->FECHA),
 	'Actualizar',
 );

@@ -5,7 +5,7 @@
 /* @var $model Arrienda */
 
 $this->breadcrumbs=array(
-	'Arriendas'=>array('index'),
+	'Arriendos'=>array('index'),
 	'Crear',
 );
 
@@ -14,7 +14,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Crear Arrienda</h1>
+<h1>Crear Arriendo</h1>
 
 <?php $this->renderPartial('_form', array('model'=>$model)); ?>
 

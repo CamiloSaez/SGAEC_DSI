@@ -41,7 +41,7 @@ class Visitas extends CActiveRecord
 			array('VIS_RUT, CON_RUT', 'length', 'min'=>11, 'max'=>12),
 			array('HOG_N_USUARIO', 'length', 'max'=>100),
 			array('VIS_NOMBRE, VIS_APELLIDOS', 'length', 'min'=>3,'max'=>50),
-			array('VIS_NOMBRE, VIS_APELLIDOS', 'match', 'pattern'=>'/^[a-zÃ¡Ã©Ã­Ã³ÃºÃ±\s]+$/i','message'=>'Porfavor ingrese solo letras.'),
+			array('VIS_NOMBRE, VIS_APELLIDOS', 'match', 'pattern'=>'/^[a-zÃ¡Ã©Ã­Ã³ÃºÃ±\s]+$/i','message'=>'Por favor ingrese solo letras.'),
 			array('VIS_FECHA', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.

@@ -5,7 +5,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
-	'Visitases',
+	'Visitas',
 );
 if(!yii::app()->user->checkAccess("hogar") ){
 $this->menu=array(

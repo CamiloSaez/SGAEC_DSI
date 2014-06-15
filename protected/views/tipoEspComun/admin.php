@@ -5,13 +5,13 @@
 /* @var $model TipoEspComun */
 
 $this->breadcrumbs=array(
-	'Tipo Esp Comuns'=>array('index'),
+	'Tipo de espacios comunes'=>array('index'),
 	'Administrar',
 );
 
 $this->menu=array(
-	array('label'=>'Listar TipoEspComun', 'url'=>array('index')),
-	array('label'=>'Crear TipoEspComun', 'url'=>array('create')),
+	array('label'=>'Listar Tipo', 'url'=>array('index')),
+	array('label'=>'Crear Tipo', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "

@@ -34,9 +34,10 @@ class VisitasController extends Controller
 				"roles"=>array('hogar'),
 			),			
 
+			/*
 			array('allow',  // allow all users to perform 'index' and 'view' actions				
 				"roles"=>array('admin'),
-			),
+			),*/
 
 			array('deny',  // deny all users
 				'users'=>array('*'),

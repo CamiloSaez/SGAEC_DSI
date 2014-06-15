@@ -80,6 +80,7 @@ class ArriendaController extends Controller
 		
 			//Verificar si existe o no el arriendo
 			$criteria=new CDbCriteria;
+			$ahora=date('Y-m-d H:i:s');
 			$criteria->condition = "ESP_CORREL = '$e' AND FECHA ='$f'";
 			$var=Arrienda::model()->findAll($criteria);
 			$r=false;
@@ -87,12 +88,21 @@ class ArriendaController extends Controller
 				$r=true;
 			}
 			
+
+			// is the end date more ancient than the start date?
+			if(strtotime($ahora)>strtotime($model->FECHA)){
+				$r=true;
+			}
+			
+			
 			if( yii::app()->user->checkAccess("hogar")&&!$r){
 				$user= yii::app()->user->id;
 				$model->HOG_N_USUARIO=yii::app()->user->id;
-				if($model->save())
+				if($model->save()){
+					$model->insertar($model->HOG_N_USUARIO,$model->getMonto($model->ESP_CORREL),$model->getDesc($model->ESP_CORREL));
 					$this->redirect(array('admin'));
-			}else{
+					}
+			}else{  
 				$this->redirect(array('error'));
 			}
 		}
